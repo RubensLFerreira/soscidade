@@ -1,0 +1,23 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.box-style {
+  background-color: white;
+  width: 26rem;
+  padding: 25px 0 25px 0;
+  border-radius: 15px;
+  margin: 4rem auto 5rem auto;
+}
+
+.tittle-style {
+  color: #2F88FF;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.button-style {
+  margin-top: 3rem;
+  width: 20rem;
+}
