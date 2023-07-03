@@ -1,22 +1,24 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-import Inicio from "../pages/Inicio";
+import Inicio from '../pages/Inicio';
 
-import Login from "../pages/Login";
+import Login from '../pages/Login';
 
-import Reportar from "../pages/Reportar";
+import Reportar from '../pages/Reportar';
 
-import TipoCadastro from "../pages/TipoCadastro";
+import TipoCadastro from '../pages/TipoCadastro';
 
-import Denunciar from "../pages/Denunciar";
+import Denunciar from '../pages/Denunciar';
 
-import BuscarCidadaos from "../pages/Admin/BuscarCidadao";
-import CadastrarCidadao from "../pages/Cidadao/CadastrarCidadao";
+import BuscarCidadaos from '../pages/Admin/BuscarCidadao';
+import CadastrarCidadao from '../pages/Cidadao/CadastrarCidadao';
 
-import BuscarPrefeitura from "../pages/Admin/BuscarPrefeitura";
-import CadastrarPrefeitura from "../pages/Prefeitura/CadastrarPrefeitura";
+import BuscarPrefeitura from '../pages/Admin/BuscarPrefeitura';
+import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
 
-import NotPage from "../pages/NotPage";
+import NotPage from '../pages/NotPage';
+
+import RequireAuth from '../context/RequireAuth';
 
 export const Router = () => {
   return (
@@ -34,7 +36,15 @@ export const Router = () => {
       <Route path="/cidadaos" element={<BuscarCidadaos />} />
       <Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
 
-      <Route path="/prefeituras" element={<BuscarPrefeitura />} />
+      <Route
+        path="/prefeituras"
+        element={
+          <RequireAuth>
+            <BuscarPrefeitura />
+          </RequireAuth>
+        }
+      />
+
       <Route path="/prefeitura/cadastrar" element={<CadastrarPrefeitura />} />
 
       <Route path="*" element={<NotPage />} />

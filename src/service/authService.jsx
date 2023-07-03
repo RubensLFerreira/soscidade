@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import api from './api';
 
 export const useApi = () => ({
-  validade: async (token) => {
+  validadeToken: async (token) => {
     let isExpired = false;
 
     const decodedToken = jwt_decode(token);
@@ -22,15 +22,15 @@ export const useApi = () => ({
           },
         })
         .catch((err) => err);
-      localStorage.setItem('ID', usuario.data.id);
-      return usuario.data;
+      localStorage.setItem('ID', usuario.usuario['id']);
+      return usuario.usuario;
     }
     return null;
   },
 
   signin: async (login, senha) => {
     const usuario = await api
-      .post('/usuario/authenticate', { login, senha })
+      .post('/login', { login, senha })
       .then((response) => response.data)
       .catch((err) => err);
 
