@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
-;
-import { Grid, Typography, Alert, Box } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import { Grid, Typography, Alert, Box, IconButton } from '@mui/material';
 import { LogoVertical } from '../../components/LogoVertical';
 import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
 
+import { BsArrowLeftSquare } from 'react-icons/bs';
+
 import { validarLogin, validarSenha } from '../../utils/validadores';
+import EscolherCadastro from '../../components/EscolherCadastro';
 
 import AuthService from '../../service/AuthService';
 
@@ -57,6 +59,13 @@ export default function Login() {
     <StyledBox>
       <form>
         <Grid container spacing={2}>
+          <Grid item xs={1}>
+            <Link to={`/reportar`}>
+              <IconButton aria-label="delete" className="button-voltar-login">
+                <BsArrowLeftSquare />
+              </IconButton>
+            </Link>
+          </Grid>
           <Grid item xs={12}>
             <LogoVertical />
           </Grid>
@@ -86,10 +95,8 @@ export default function Login() {
             </StyledButton>
           </Grid>
           <Grid item xs={12}>
-            <Typography>
-              Não possui conta?{' '}
-              <Link to={`/cidadao/cadastrar`}>Cadastra-se</Link>
-            </Typography>
+            <Typography>Não possui conta?</Typography>
+            <EscolherCadastro />
           </Grid>
         </Grid>
       </form>

@@ -17,9 +17,6 @@ export default function Inicio() {
         <Button href="/reportar">Reportar</Button>
         <br />
         <hr />
-        <Button href="/tipo-cadastro">Tipo de cadastro</Button>
-        <br />
-        <hr />
         <Button href="/denunciar">Denunciar</Button>
         <br />
         <hr />

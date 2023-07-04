@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { cadastrarPrefeitura } from "../../../service/prefeituraService";
+import { cadastrarPrefeitura } from '../../../service/prefeituraService';
 
-import { Alert, Stack, Grid, IconButton } from "@mui/material";
-import { BsArrowLeftSquare } from "react-icons/bs";
+import { Alert, Stack, Grid, IconButton } from '@mui/material';
+import { BsArrowLeftSquare } from 'react-icons/bs';
 
 import {
   StyledBox,
@@ -12,18 +12,17 @@ import {
   StyledTextField1,
   StyledTypography,
   StyledTypography2,
-} from "./StyledPrefeitura";
-
+} from './StyledPrefeitura';
 
 export default function FormRegisterPrefeitura() {
   const [alert, setAlert] = useState(false);
-  const [nome, setNome] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [prefeito, setPrefeito] = useState("");
-  const [site, setSite] = useState("");
-  const [login, setLogin] = useState("");
-  const [senha, setSenha] = useState("");
+  const [nome, setNome] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
+  const [prefeito, setPrefeito] = useState('');
+  const [site, setSite] = useState('');
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
 
   const prefeituraSubmit = async (event) => {
     event.preventDefault();
@@ -43,8 +42,8 @@ export default function FormRegisterPrefeitura() {
   return (
     <StyledBox>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Link to={`/tipo-cadastro`}>
+        <Grid item xs={1}>
+          <Link to={`/login`}>
             <IconButton aria-label="back" className="button-voltar-login">
               <BsArrowLeftSquare />
             </IconButton>
@@ -52,7 +51,7 @@ export default function FormRegisterPrefeitura() {
         </Grid>
 
         <Grid item xs={12}>
-          <StyledTypography>Cadastrar</StyledTypography>
+          <StyledTypography>Cadastrar Prefeitura</StyledTypography>
         </Grid>
 
         <Grid item xs={12}>
@@ -147,7 +146,11 @@ export default function FormRegisterPrefeitura() {
         </Grid>
 
         <Grid item xs={12}>
-          <StyledButton variant="contained" type="submit" onClick={prefeituraSubmit}>
+          <StyledButton
+            variant="contained"
+            type="submit"
+            onClick={prefeituraSubmit}
+          >
             Cadastrar
           </StyledButton>
         </Grid>
@@ -158,9 +161,9 @@ export default function FormRegisterPrefeitura() {
           </StyledTypography2>
         </Grid>
       </Grid>
-      
+
       {alert && (
-        <Stack sx={{ width: "300px", marginLeft: "1rem" }} spacing={2}>
+        <Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
           <Alert variant="filled" severity="success">
             Prefeitura cadastrada com sucesso!
           </Alert>

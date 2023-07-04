@@ -2,7 +2,7 @@ import { Box, TextField, Button, styled } from '@mui/material';
 
 export const StyledBox  = styled(Box) ({
   backgroundColor: '#ffffff',
-  width: '350px',
+  width: '400px',
   margin: '3rem auto 0 auto',
   textAlign: 'center',
   padding: '3rem 1rem',

@@ -6,8 +6,6 @@ import Login from '../pages/Login';
 
 import Reportar from '../pages/Reportar';
 
-import TipoCadastro from '../pages/TipoCadastro';
-
 import Denunciar from '../pages/Denunciar';
 
 import BuscarCidadaos from '../pages/Admin/BuscarCidadao';
@@ -28,8 +26,6 @@ export const Router = () => {
       <Route path="/login" element={<Login />} />
 
       <Route path="/reportar" element={<Reportar />} />
-
-      <Route path="/tipo-cadastro" element={<TipoCadastro />} />
 
       <Route path="/denunciar" element={<Denunciar />} />
 

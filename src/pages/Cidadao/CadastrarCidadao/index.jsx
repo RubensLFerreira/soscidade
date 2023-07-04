@@ -1,32 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { cadastrarCidadao } from "../../../service/cidadaoService";
+import { cadastrarCidadao } from '../../../service/cidadaoService';
+
+import { Alert, Stack, Grid, IconButton } from '@mui/material';
+import { BsArrowLeftSquare } from 'react-icons/bs';
 
 import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  IconButton,
-  Stack,
-  Alert,
-} from "@mui/material";
-
-import { BsArrowLeftSquare } from "react-icons/bs";
-
-import "./CadastrarCidadao.css";
+  StyledBox,
+  StyledButton,
+  StyledTextField1,
+  StyledTypography,
+  StyledTypography2,
+} from './StyledCidadao';
 
 export default function FormRegister() {
   const [alert, setAlert] = useState(false);
-  const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [sexo, setSexo] = useState("");
-  const [nascimento, setNascimento] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [login, setLogin] = useState("");
-  const [senha, setSenha] = useState("");
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [sexo, setSexo] = useState('');
+  const [nascimento, setNascimento] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
 
   const cidadaoSubmit = async (event) => {
     event.preventDefault();
@@ -45,157 +42,147 @@ export default function FormRegister() {
   };
 
   return (
-    <div>
-      <div>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-          style={{ textAlign: "center" }}
-          className="box-style"
-        >
-          <Link to={`/tipo-cadastro`}>
-            <IconButton aria-label="delete" className="button-voltar-login">
+    <StyledBox>
+      <Grid container spacing={2}>
+        <Grid item xs={1}>
+          <Link to={`/login`}>
+            <IconButton aria-label="back" className="button-voltar-login">
               <BsArrowLeftSquare />
             </IconButton>
           </Link>
+        </Grid>
 
-          <Typography
-            className="tittle-style"
-            style={{ fontWeight: "700" }}
-            variant="h5"
+        <Grid item xs={12}>
+          <StyledTypography>Cadastrar cidadão</StyledTypography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Nome"
+            variant="standard"
+            type="text"
+            required
+            placeholder="Digite seu nome"
+            value={nome}
+            onChange={(event) => setNome(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Telefone"
+            variant="standard"
+            type="tel"
+            required
+            placeholder="Digite seu telefone"
+            value={telefone}
+            onChange={(event) => setTelefone(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+            type="email"
+            required
+            placeholder="Digite seu email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="CPF"
+            variant="standard"
+            type="text"
+            required
+            placeholder="Digite seu cpf"
+            value={cpf}
+            onChange={(event) => setCpf(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Sexo"
+            variant="standard"
+            type="text"
+            required
+            placeholder="Digite seu sexo"
+            value={sexo}
+            onChange={(event) => setSexo(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            variant="standard"
+            type="date"
+            required
+            placeholder="Digite seu nascimento"
+            value={nascimento}
+            onChange={(event) => setNascimento(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Login"
+            variant="standard"
+            type="text"
+            required
+            placeholder="Digite seu login"
+            value={login}
+            onChange={(event) => setLogin(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledTextField1
+            id="standard-basic"
+            label="Senha"
+            variant="standard"
+            type="password"
+            required
+            placeholder="Digite sua senha"
+            value={senha}
+            onChange={(event) => setSenha(event.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledButton
+            variant="contained"
+            type="submit"
+            onClick={cidadaoSubmit}
           >
             Cadastrar
-          </Typography>
+          </StyledButton>
+        </Grid>
 
-          <form onSubmit={cidadaoSubmit}>
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="Nome completo"
-              variant="standard"
-              type="text"
-              required
-              placeholder="Ex: Pedro Silva"
-              value={nome}
-              onChange={(event) => setNome(event.target.value)}
-            />
-            <br />
+        <Grid item xs={12}>
+          <StyledTypography2>
+            Possui conta? <Link to={`/Login`}>Login</Link>
+          </StyledTypography2>
+        </Grid>
+      </Grid>
 
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="CPF"
-              variant="standard"
-              type="text"
-              required
-              placeholder="Obs: Sem sinais"
-              value={cpf}
-              onChange={(event) => setCpf(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "3.5rem" }}
-              id="standard-basic"
-              label="Sexo"
-              variant="standard"
-              type="text"
-              required
-              placeholder="Ex: M ou F"
-              value={sexo}
-              onChange={(event) => setSexo(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "1.5rem" }}
-              id="standard-basic"
-              variant="standard"
-              type="date"
-              required
-              value={nascimento}
-              onChange={(event) => setNascimento(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="Telefone"
-              variant="standard"
-              type="tel"
-              required
-              placeholder="Obs: sem sinais"
-              value={telefone}
-              onChange={(event) => setTelefone(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="Email"
-              variant="standard"
-              type="email"
-              required
-              placeholder="Ex: mario@gmail.com"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="Login"
-              variant="standard"
-              type="text"
-              required
-              placeholder="Obs: será usado para login"
-              value={login}
-              onChange={(event) => setLogin(event.target.value)}
-            />
-            <br />
-
-            <TextField
-              style={{ width: "20rem", height: "2.5rem" }}
-              id="standard-basic"
-              label="Senha"
-              variant="standard"
-              type="password"
-              required
-              placeholder="Obs: será usado para login"
-              value={senha}
-              onChange={(event) => setSenha(event.target.value)}
-            />
-            <br />
-
-            <Button
-              style={{ margin: "3rem 0 2rem 0" }}
-              className="button-style"
-              variant="contained"
-              type="submit"
-            >
-              Cadastrar
-            </Button>
-
-            <Typography>
-              Já possui uma conta? <Link to={`/login`}>Login</Link>
-            </Typography>
-          </form>
-        </Box>
-      </div>
       {alert && (
-        <Stack sx={{ width: "300px", marginLeft: "1rem" }} spacing={2}>
+        <Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
           <Alert variant="filled" severity="success">
-            Cidadão cadastrado com sucesso!
+            Prefeitura cadastrada com sucesso!
           </Alert>
         </Stack>
       )}
-    </div>
+    </StyledBox>
   );
 }
