@@ -18,7 +18,7 @@ import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
 
 import NotPage from '../pages/NotPage';
 
-import RequireAuth from '../context/RequireAuth';
+import ProtectedRoutes from './ProtectedRoutes';
 
 export const Router = () => {
   return (
@@ -39,9 +39,9 @@ export const Router = () => {
       <Route
         path="/prefeituras"
         element={
-          <RequireAuth>
+          <ProtectedRoutes>
             <BuscarPrefeitura />
-          </RequireAuth>
+          </ProtectedRoutes>
         }
       />
 
