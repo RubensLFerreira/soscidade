@@ -1,104 +1,112 @@
-import React, { useState, useContext } from 'react';
-
-import AuthContext from '../../context/AuthContext';
-
-import { Link, useNavigate } from 'react-router-dom';
-
-import { Grid, Typography, Box, Alert } from '@mui/material';
-
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+;
+import { Grid, Typography, Alert, Box } from '@mui/material';
 import { LogoVertical } from '../../components/LogoVertical';
-
 import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
 
+import { validarLogin, validarSenha } from '../../Utils/validadores';
+
+import AuthService from '../../service/AuthService';
+
+const authService = new AuthService();
+
 export default function Login() {
-  const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
-  const [login, setLogin] = useState('');
-  const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({});
+  const navigate = useNavigate();
 
-  const auth = useContext(AuthContext);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleLogin = async () => {
-    if (login && senha) {
-      const isLogged = await auth.signin(login, senha);
-      if (isLogged) {
+    try {
+      setLoading(true);
+
+      const response = await authService.login(form);
+      console.log('Usuário logado!', response);
+
+      if (response) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('login', response.data.login);
+
         navigate('/');
         setAlert(true);
         setTimeout(() => {
-          setAlert(false); 
+          setAlert(false);
         }, 3000);
-      } else {
-        console.log('Erro no handleLogin');
       }
+
+      setLoading(false);
+    } catch (error) {
+      console.log('erro do Login', error);
+      alert('Erro ao logar usuário');
     }
   };
 
-  const ClickCadastro = () => {
-    navigate('/tipo-cadastro');
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const validadorInput = () => {
+    return validarLogin(form.login) && validarSenha(form.senha);
   };
 
   return (
     <StyledBox>
-      <form onSubmit={() => setAlert(true)}>
+      <form>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <LogoVertical />
           </Grid>
-
           <Grid item xs={12}>
             <StyledTextField1
-              id="standard-basic"
-              label="Login"
-              variant="standard"
+              name="login"
+              placeholder="Digite o seu login"
+              onChange={handleChange}
               type="text"
-              required
-              placeholder="Digite seu login"
-              value={login}
-              onChange={(event) => setLogin(event.target.value)}
             />
           </Grid>
-
           <Grid item xs={12}>
             <StyledTextField1
-              id="standard-basic"
-              label="Senha"
-              variant="standard"
+              name="senha"
+              placeholder="Digite a sua senha"
+              onChange={handleChange}
               type="password"
-              required
-              placeholder="Digite sua senha"
-              value={senha}
-              onChange={(event) => setSenha(event.target.value)}
             />
           </Grid>
-
           <Grid item xs={12}>
-            <StyledButton onClick={handleLogin} variant="contained" type="submit">
+            <StyledButton
+              type="submit"
+              onClick={handleSubmit}
+              disabled={loading || !validadorInput()}
+            >
               Entrar
             </StyledButton>
           </Grid>
-
           <Grid item xs={12}>
             <Typography>
-              Não possui conta? <Link onClick={ClickCadastro}>Cadastra-se</Link>
+              Não possui conta?{' '}
+              <Link to={`/cidadao/cadastrar`}>Cadastra-se</Link>
             </Typography>
           </Grid>
         </Grid>
-
-        {alert && (
-          <Box
-            sx={{
-              float: 'right',
-              padding: '1em',
-              marginTop: '480px',
-              marginRight: '-400px',
-            }}
-          >
-            <Alert sx={{}} variant="filled" severity="success">
-              Usuário logado com sucesso!
-            </Alert>
-          </Box>
-        )}
       </form>
+      {alert && (
+        <Box
+          sx={{
+            float: 'right',
+            padding: '1em',
+            marginTop: '480px',
+            marginRight: '-400px',
+          }}
+        >
+          <Alert sx={{}} variant="filled" severity="success">
+            Usuário logado com sucesso!
+          </Alert>
+        </Box>
+      )}
     </StyledBox>
   );
 }
