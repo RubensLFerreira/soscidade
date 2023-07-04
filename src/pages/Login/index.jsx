@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
 import { Grid, Typography, Alert, Box, IconButton } from '@mui/material';
-import { LogoVertical } from '../../components/LogoVertical';
 import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
 
+import { LogoVertical } from '../../components/Logos/LogoVertical';
 import { BsArrowLeftSquare } from 'react-icons/bs';
 
 import { validarLogin, validarSenha } from '../../utils/validadores';
-import EscolherCadastro from '../../components/EscolherCadastro';
+
+import EscolherCadastro from '../../components/Login/EscolherCadastro';
 
 import AuthService from '../../service/AuthService';
 

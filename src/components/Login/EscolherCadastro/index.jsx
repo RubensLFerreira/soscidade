@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function EscolherCadastro() {
   const [anchorEl, setAnchorEl] = React.useState(null);

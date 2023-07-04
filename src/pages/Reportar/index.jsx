@@ -3,8 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import { BsArrowRightSquare } from "react-icons/bs";
 import { FiHelpCircle } from "react-icons/fi";
 
-import { LogoReportar } from "../../components/LogoReportar";
-import { Mapa } from "../../components/Mapa";
+import { LogoReportar } from "../../components/Logos/LogoReportar";
+import { Mapa } from "../../components/Logos/Mapa";
 
 import {
   StyledBox,

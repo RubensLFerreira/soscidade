@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material/";
+import { Grid, Paper } from '@mui/material/';
 
 import {
   StyledBox,
@@ -9,17 +9,19 @@ import {
   StyledTextField1,
   StyledTextField2,
   StyledButton,
-} from "./StyledDenunciar";
+} from './StyledDenunciar';
 
-import { Iluminacao } from "../../components/Iluminacao";
-import { Avenida } from "../../components/Avenida";
-import { Lixo } from "../../components/Lixo";
-import { Saneamento } from "../../components/Saneamento";
-import { Sinalizacao } from "../../components/Sinalizacao";
-import { Outros } from "../../components/Outros";
+import {
+  Iluminacao,
+  Avenida,
+  Lixo,
+  Saneamento,
+  Sinalizacao,
+  Outros,
+} from '../../components/Denunciar';
 
-import Navbar from "../../components/Navbar";
-import UploadImagem from "../../components/UploadImagem";
+import Navbar from '../../components/Navbar';
+import UploadImagem from '../../components/Denunciar/UploadImagem';
 
 export default function Denunciar() {
   return (
