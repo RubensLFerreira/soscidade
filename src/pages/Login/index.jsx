@@ -5,7 +5,7 @@ import { Grid, Typography, Alert, Box } from '@mui/material';
 import { LogoVertical } from '../../components/LogoVertical';
 import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
 
-import { validarLogin, validarSenha } from '../../Utils/validadores';
+import { validarLogin, validarSenha } from '../../utils/validadores';
 
 import AuthService from '../../service/AuthService';
 
