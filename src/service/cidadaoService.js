@@ -1,12 +1,12 @@
-import api from "./api";
+import api from './api';
 
 export const todosCidadaos = async () => {
   try {
-    const cidadaos = await api.get("/cidadaos");
+    const cidadaos = await api.get('/cidadaos');
     // console.log(cidadaos['data']['cidadaos'][0]['usuario']);
     return cidadaos.data;
   } catch (error) {
-    console.log("[Erro] Service/cidadaoService", error);
+    console.log('[Erro] Service/cidadaoService', error);
   }
 };
 
@@ -22,7 +22,7 @@ export const cadastrarCidadao = async (
   perfil_id = 1
 ) => {
   try {
-    const cidadaos = await api.post("/cidadao/cadastrar", {
+    const cidadaos = await api.post('/cidadao/cadastrar', {
       nome,
       cpf,
       sexo,
@@ -35,6 +35,6 @@ export const cadastrarCidadao = async (
     });
     return cidadaos;
   } catch (error) {
-    console.log("[Erro] Service/cidadaoService", error);
+    console.log('[Erro] Service/cidadaoService', error);
   }
 };

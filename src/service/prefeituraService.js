@@ -1,11 +1,11 @@
-import api from "./api";
+import api from './api';
 
 export const todasPrefeituras = async () => {
   try {
-    const prefeituras = await api.get("/prefeituras");
+    const prefeituras = await api.get('/prefeituras');
     return prefeituras.data;
   } catch (error) {
-    console.log("[Erro] Service/prefeituraService", error);
+    console.log('[Erro] Service/prefeituraService', error);
   }
 };
 
@@ -20,7 +20,7 @@ export const cadastrarPrefeitura = async (
   perfil_id = 2
 ) => {
   try {
-    const prefeitura = await api.post("/prefeitura/cadastrar", {
+    const prefeitura = await api.post('/prefeitura/cadastrar', {
       nome,
       telefone,
       email,
@@ -33,6 +33,6 @@ export const cadastrarPrefeitura = async (
 
     return prefeitura;
   } catch (error) {
-    console.log("[Erro] Service/prefeituraService", error);
+    console.log('[Erro] Service/prefeituraService', error);
   }
 };
