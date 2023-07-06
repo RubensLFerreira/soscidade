@@ -1,4 +1,4 @@
-import notFound from "../../../public/img/not-found.jpeg";
+import notFound from "/public/img/not-found.jpeg";
 
 export default function NotPage() {
   return (
