@@ -14,6 +14,9 @@ export default function Inicio() {
         <Button href="/login">Login</Button>
         <br />
         <hr />
+        <Button href="/admin">Admin</Button>
+        <br />
+        <hr />
         <Button href="/reportar">Reportar</Button>
         <br />
         <hr />
