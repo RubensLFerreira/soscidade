@@ -34,7 +34,13 @@ export default function Denunciar() {
 
         <StyledGrid>
           <StyledTypography2>Título do problema</StyledTypography2>
-          <StyledTextField1></StyledTextField1>
+          <StyledTextField1
+            label="Titulo"
+            required
+            placeholder="Ex: Buraco na rua"
+            variant="outlined"
+            onChange={(event) => setTitulo(event.target.value)}
+          />
           <UploadImagem />
         </StyledGrid>
 
