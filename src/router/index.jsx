@@ -8,6 +8,8 @@ import Reportar from '../pages/Reportar';
 
 import Denunciar from '../pages/Denunciar';
 
+import Admin from '../pages/Admin';
+
 import BuscarCidadaos from '../pages/Admin/BuscarCidadao';
 import CadastrarCidadao from '../pages/Cidadao/CadastrarCidadao';
 
@@ -22,6 +24,8 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Inicio />} />
+
+      <Route path="/admin" element={<Admin />} />
 
       <Route path="/login" element={<Login />} />
 
