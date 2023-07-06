@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -13,11 +13,11 @@ import {
   Button,
   Tooltip,
   MenuItem,
-} from "@mui/material/";
+} from '@mui/material/';
 
-import AdbIcon from "@mui/icons-material/Adb";
+import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ["Perfil", "Histórico", "Login", "Logout"];
+const settings = ['Perfil', 'Histórico', 'Login', 'Logout'];
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{height: '65px'}}>
+    <AppBar position="static" sx={{ height: '65px' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -46,59 +46,57 @@ export default function Navbar() {
             href="/"
             sx={{
               mr: 1,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "roboto",
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'roboto',
               fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
             SOS cidade
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: 'block', md: 'none' },
               }}
-            >
-            </Menu>
+            ></Menu>
           </Box>
 
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Link to={'/'}>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                 Inicio
               </Button>
             </Link>
 
             <Link to={'/'}>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                 Canais de atendimento
               </Button>
             </Link>
 
             <Link to={'/'}>
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                 Acesso à informação
               </Button>
             </Link>
-
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -108,17 +106,17 @@ export default function Navbar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
