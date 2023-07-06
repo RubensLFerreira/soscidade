@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { todasPrefeituras } from "../../../service/prefeituraService";
+import { useState, useEffect } from 'react';
+import { todasPrefeituras } from '../../../service/prefeituraService';
 
-import Navbar from "../../../components/Navbar";
+import Navbar from '../../../components/Navbar';
 
 import {
   Table,
@@ -11,9 +11,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material/";
+} from '@mui/material/';
 
-import { StyledBox } from "./StyledPrefeitura";
+import { StyledBox } from './StyledPrefeitura';
 
 export default function BuscarPrefeituras() {
   const [prefeitura, setPrefeitura] = useState([]);
@@ -46,15 +46,17 @@ export default function BuscarPrefeituras() {
               {prefeitura.map((prefeitura) => (
                 <TableRow
                   key={prefeitura.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {prefeitura.id}
                   </TableCell>
-                  <TableCell align="right">{prefeitura.usuario["nome"]}</TableCell>
+                  <TableCell align="right">
+                    {prefeitura.usuario['nome']}
+                  </TableCell>
                   <TableCell align="right">{prefeitura.site}</TableCell>
                   <TableCell align="right">
-                    {prefeitura.usuario["email"]}
+                    {prefeitura.usuario['email']}
                   </TableCell>
                 </TableRow>
               ))}

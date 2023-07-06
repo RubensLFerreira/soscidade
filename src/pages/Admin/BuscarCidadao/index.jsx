@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { todosCidadaos } from "../../../service/cidadaoService";
+import { useState, useEffect } from 'react';
+import { todosCidadaos } from '../../../service/cidadaoService';
 
-import Navbar from "../../../components/Navbar";
+import Navbar from '../../../components/Navbar';
 
 import {
   Table,
@@ -11,9 +11,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material/";
+} from '@mui/material/';
 
-import { StyledBox } from "./StyledCidadao";
+import { StyledBox } from './StyledCidadao';
 
 export default function BuscarCidadaos() {
   const [cidadao, setCidadao] = useState([]);
@@ -46,15 +46,15 @@ export default function BuscarCidadaos() {
               {cidadao.map((cidadao) => (
                 <TableRow
                   key={cidadao.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     {cidadao.id}
                   </TableCell>
-                  <TableCell align="right">{cidadao.usuario["nome"]}</TableCell>
+                  <TableCell align="right">{cidadao.usuario['nome']}</TableCell>
                   <TableCell align="right">{cidadao.cpf}</TableCell>
                   <TableCell align="right">
-                    {cidadao.usuario["email"]}
+                    {cidadao.usuario['email']}
                   </TableCell>
                 </TableRow>
               ))}

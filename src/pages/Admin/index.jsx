@@ -1,11 +1,40 @@
-import { Grid } from '@mui/material';
+import ListaDenuncias from '../../components/Admin/ListaDenuncias';
+import ListaUsuarios from '../../components/Admin/ListaUsuarios';
+import InputSearch from '../../components/Admin/InputSearch';
+import TabelaCidadaos from '../../components/Admin/TabelaCidadaos';
+import DenunciasPendentes from '../../components/Admin/DenunciasPendentes';
+
+import {
+  StyledBox,
+  StyledGrid,
+  StyledGrid1,
+  StyledGrid2,
+  StyledGrid3,
+} from './StyledAdmin';
+import { Typography } from '@mui/material';
 
 export default function Admin() {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={4} style={{backgroundColor: 'red'}}>red</Grid>
-      <Grid item xs={12} style={{backgroundColor: 'green'}}>green</Grid>
-      <Grid item xs={12} style={{backgroundColor: 'blue'}}>blue</Grid>
-    </Grid>
+    <StyledBox>
+      <StyledGrid container>
+        <StyledGrid1>
+          <Typography
+            style={{ textAlign: 'center', margin: '2rem 0' }}
+            variant="h4"
+          >
+            Dashboard
+          </Typography>
+          <InputSearch />
+          <ListaUsuarios />
+          <ListaDenuncias />
+        </StyledGrid1>
+        <StyledGrid2>
+          <TabelaCidadaos />
+        </StyledGrid2>
+        <StyledGrid3>
+          <DenunciasPendentes />
+        </StyledGrid3>
+      </StyledGrid>
+    </StyledBox>
   );
 }
