@@ -31,7 +31,7 @@ export default function TabelaCidadaos() {
         Lista de cidadãos cadastrados
       </Typography>
       <TableContainer
-        style={{ maxHeight: '500px', overflowY: 'auto' }}
+        style={{ maxHeight: '500px', maxWidth: '100%', overflowY: 'auto', overflowX: 'auto' }}
         component={Paper}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

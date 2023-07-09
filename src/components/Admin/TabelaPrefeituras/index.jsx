@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import { useState, useEffect } from 'react';
-import { todasPrefeituras } from '../../../service/prefeituraService';
+import { todasPrefeituras } from '../../../service/PrefeituraService';
 
 export default function TabelaPrefeituras() {
   const [prefeitura, setPrefeitura] = useState([]);
@@ -31,7 +31,7 @@ export default function TabelaPrefeituras() {
         Lista de cidadãos cadastrados
       </Typography>
       <TableContainer
-        style={{ maxHeight: '500px', overflowY: 'auto' }}
+        style={{ maxHeight: '500px', maxWidth: '100%', overflowY: 'auto', overflowX: 'auto' }}
         component={Paper}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
