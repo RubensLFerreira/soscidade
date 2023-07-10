@@ -1,7 +1,8 @@
 import ListaDenuncias from '../../components/Admin/ListaDenuncias';
 import ListaUsuarios from '../../components/Admin/ListaUsuarios';
 import InputSearch from '../../components/Admin/InputSearch';
-import TabelaCidadaos from '../../components/Admin/TabelaCidadaos';
+// import TabelaCidadaos from '../../components/Admin/TabelaCidadaos';
+import TabelaProblemas from '../../components/Admin/TabelaProblemas';
 import DenunciasPendentes from '../../components/Admin/DenunciasPendentes';
 
 import {
@@ -29,10 +30,11 @@ export default function Admin() {
           <ListaDenuncias />
         </StyledGrid1>
         <StyledGrid2>
-          <TabelaCidadaos />
+          {/* <TabelaCidadaos /> */}
+					<TabelaProblemas />
         </StyledGrid2>
         <StyledGrid3>
-          <DenunciasPendentes />
+          {/* <DenunciasPendentes /> */}
         </StyledGrid3>
       </StyledGrid>
     </StyledBox>
