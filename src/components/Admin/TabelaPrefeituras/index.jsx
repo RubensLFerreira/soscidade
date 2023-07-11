@@ -27,7 +27,7 @@ export default function TabelaPrefeituras() {
 	return (
 		<>
 			<Typography variant="h4" style={{ margin: '2rem 0' }}>
-				Lista de cidadãos cadastrados
+				Lista de prefeituras cadastradas
 			</Typography>
 			<TableContainer
 				style={{
