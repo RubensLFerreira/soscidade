@@ -19,7 +19,7 @@ export default function TabelaProblemas() {
 		const carregarProblemas = async () => {
 			const problemas = await todosProblemas();
 			setProblema(problemas.problemas);
-			console.log(problemas.problemas[0].status);
+			console.log(problemas.problemas);
 		};
 		carregarProblemas();
 	}, []);
@@ -27,7 +27,7 @@ export default function TabelaProblemas() {
 	return (
 		<>
 			<Typography variant="h4" style={{ margin: '2rem 0' }}>
-				Lista de denúncias cadastrados
+				Lista de denúncias cadastradas
 			</Typography>
 			<TableContainer
 				style={{
