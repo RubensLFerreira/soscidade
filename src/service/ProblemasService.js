@@ -10,17 +10,17 @@ export const todosProblemas = async () => {
 	}
 };
 
-export const problemasPendentes = async () => {
+export const todosProblemasPendentes = async () => {
 	try {
-		const pendentes = await api.get('/problemas/pendentes');
-		return pendentes.data;
+		const problemas = await api.get('/problemas/pendentes');
+		return problemas.data;
 	} catch (error) {
 		console.log('Erro no ProblemasServices!');
 		return { message: error };
 	}
 };
 
-export const problemasFinalizados = async () => {
+export const todosProblemasFinalizados = async () => {
 	try {
 		const finalizados = await api.get('/problemas/finalizados');
 		return finalizados.data;

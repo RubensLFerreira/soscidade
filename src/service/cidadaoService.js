@@ -3,7 +3,6 @@ import api from './Api';
 export const todosCidadaos = async () => {
 	try {
 		const cidadaos = await api.get('/cidadaos');
-		// console.log(cidadaos['data']['cidadaos'][0]['usuario']);
 		return cidadaos.data;
 	} catch (error) {
 		console.log('[Erro] Service/cidadaoService', error);
