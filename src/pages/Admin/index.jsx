@@ -4,6 +4,7 @@ import TabelaPrefeituras from '../../components/Admin/TabelaPrefeituras';
 import TabelaProblemas from '../../components/Admin/TabelaProblemas';
 import TabelaProblemasFinalizados from '../../components/Admin/TabelaProblemasFinalizados';
 import TabelaProblemasPendentes from '../../components/Admin/TabelaProblemasPendentes';
+import Navbar from '../../components/Navbar';
 
 import {
 	StyledBox,
@@ -33,67 +34,70 @@ export default function Admin() {
 	};
 
 	return (
-		<StyledBox>
-			<StyledGrid container>
-				<StyledGrid1>
-					<StyledTypography1>Dashboard</StyledTypography1>
-					<InputSearch />
+		<>
+			<Navbar />
+			<StyledBox>
+				<StyledGrid container>
+					<StyledGrid1>
+						<StyledTypography1>Dashboard</StyledTypography1>
+						<InputSearch />
 
-					<div style={{ margin: '2rem 0' }}>
-						<StyledTypography2>Lista de usuários</StyledTypography2>
-						<ListStyle component="nav" aria-label="mailbox folders">
-							<ListItem button>
-								<ListItemText
-									primary="Cidadãos"
-									onClick={() => buttonClick1('button1')}
-								/>
-							</ListItem>
-							<Divider />
-							<ListItem button divider>
-								<ListItemText
-									primary="Prefeituras"
-									onClick={() => buttonClick1('button2')}
-								/>
-							</ListItem>
-							<Divider light />
-							<ListItem button>
-								<ListItemText
-									primary="Denúncias"
-									onClick={() => buttonClick1('button3')}
-								/>
-							</ListItem>
-						</ListStyle>
-					</div>
+						<div style={{ margin: '2rem 0' }}>
+							<StyledTypography2>Lista de usuários</StyledTypography2>
+							<ListStyle component="nav" aria-label="mailbox folders">
+								<ListItem button>
+									<ListItemText
+										primary="Cidadãos"
+										onClick={() => buttonClick1('button1')}
+									/>
+								</ListItem>
+								<Divider />
+								<ListItem button divider>
+									<ListItemText
+										primary="Prefeituras"
+										onClick={() => buttonClick1('button2')}
+									/>
+								</ListItem>
+								<Divider light />
+								<ListItem button>
+									<ListItemText
+										primary="Denúncias"
+										onClick={() => buttonClick1('button3')}
+									/>
+								</ListItem>
+							</ListStyle>
+						</div>
 
-					<div style={{ margin: '1rem 0' }}>
-						<StyledTypography2>Lista de Denúncias</StyledTypography2>
-						<ListStyle component="nav" aria-label="mailbox folders">
-							<ListItem button>
-								<ListItemText
-									primary="Finalizadas"
-									onClick={() => buttonClick2('button4')}
-								/>
-							</ListItem>
-							<Divider light />
-							<ListItem button>
-								<ListItemText
-									primary="Pendentes"
-									onClick={() => buttonClick2('button5')}
-								/>
-							</ListItem>
-						</ListStyle>
-					</div>
-				</StyledGrid1>
-				<StyledGrid2>
-					{buttonAtive1 === 'button1' && <TabelaCidadaos />}
-					{buttonAtive1 === 'button2' && <TabelaPrefeituras />}
-					{buttonAtive1 === 'button3' && <TabelaProblemas />}
-				</StyledGrid2>
-				<StyledGrid3>
-					{buttonAtive2 === 'button4' && <TabelaProblemasFinalizados />}
-					{buttonAtive2 === 'button5' && <TabelaProblemasPendentes />}
-				</StyledGrid3>
-			</StyledGrid>
-		</StyledBox>
+						<div style={{ margin: '1rem 0' }}>
+							<StyledTypography2>Lista de Denúncias</StyledTypography2>
+							<ListStyle component="nav" aria-label="mailbox folders">
+								<ListItem button>
+									<ListItemText
+										primary="Finalizadas"
+										onClick={() => buttonClick2('button4')}
+									/>
+								</ListItem>
+								<Divider light />
+								<ListItem button>
+									<ListItemText
+										primary="Pendentes"
+										onClick={() => buttonClick2('button5')}
+									/>
+								</ListItem>
+							</ListStyle>
+						</div>
+					</StyledGrid1>
+					<StyledGrid2>
+						{buttonAtive1 === 'button1' && <TabelaCidadaos />}
+						{buttonAtive1 === 'button2' && <TabelaPrefeituras />}
+						{buttonAtive1 === 'button3' && <TabelaProblemas />}
+					</StyledGrid2>
+					<StyledGrid3>
+						{buttonAtive2 === 'button4' && <TabelaProblemasFinalizados />}
+						{buttonAtive2 === 'button5' && <TabelaProblemasPendentes />}
+					</StyledGrid3>
+				</StyledGrid>
+			</StyledBox>
+		</>
 	);
 }

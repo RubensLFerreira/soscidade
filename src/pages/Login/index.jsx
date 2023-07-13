@@ -62,7 +62,7 @@ export default function Login() {
       <form>
         <Grid container spacing={2}>
           <Grid item xs={1}>
-            <Link to={`/reportar`}>
+            <Link to={`/`}>
               <IconButton aria-label="delete" className="button-voltar-login">
                 <BsArrowLeftSquare />
               </IconButton>

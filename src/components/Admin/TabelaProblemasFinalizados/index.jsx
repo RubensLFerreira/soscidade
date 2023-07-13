@@ -41,7 +41,7 @@ export default function TabelaProblemasFinalizados() {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							<TableCell>Status</TableCell>
+							<TableCell>ID</TableCell>
 							<TableCell>Categoria</TableCell>
 							<TableCell>Cidadão</TableCell>
 							<TableCell>Prefeitura</TableCell>
@@ -53,7 +53,7 @@ export default function TabelaProblemasFinalizados() {
 								key={problema.id}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 							>
-								<TableCell>{problema.status}</TableCell>
+								<TableCell>{problema.id}</TableCell>
 								<TableCell>{problema.categoria_id}</TableCell>
 								<TableCell>{problema.cidadao_id}</TableCell>
 								<TableCell>{problema.prefeitura_id}</TableCell>
