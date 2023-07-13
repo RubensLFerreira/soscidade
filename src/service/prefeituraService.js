@@ -1,4 +1,4 @@
-import api from './Api';
+import api from './baseApi';
 
 export const todasPrefeituras = async () => {
 	try {
