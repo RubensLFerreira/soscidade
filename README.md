@@ -9,21 +9,27 @@ O SOSCidade surge como uma proposta de sistema que visa solucionar os problemas 
 Clonar o repositório
 
 ```bash
+git clone https://github.com/RubensLFerreira/soscidade.git
+```
+Clonar a API api_soscidade
+
+```bash
 git clone https://github.com/RubensLFerreira/api_soscidade.git
 ```
-Instalar todas as depedências necessarias
+
+Instalar todas as depedências necessarias de ambos diretórios
 ```bash
 npm install
 ```
 
-Inicializar a aplicação
+Inicia primeiro API e depois a aplicação soscidade com o mesmo comandos abaixo
 ```bash
 npm run dev
 ```
 
 Acessar o endereço
 ```bash
-http://localhost:8080/
+http://localhost:5173/
 ```
 
 Observação: 
@@ -31,6 +37,7 @@ Observação:
 - Baixar as extensões recomendadas na pasta `vscode`.
 - É necessário atualizar a conexão com banco de dados com suas credências no arquivo `.venv` com base no exemplo `.venv.exemple`.
 - Passar um valor aleatório para a chave SECRET no arquivo `.venv.exemple`.
+- A API deve rodar na porta 8080
 
 ## Autores
 
