@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import { useState, useEffect } from 'react';
-import { todosCidadaos } from '../../../service/CidadaoService';
+import { todosCidadaos } from '../../../service/cidadaoService';
 
 export default function TabelaCidadaos() {
 	const [cidadao, setCidadao] = useState([]);

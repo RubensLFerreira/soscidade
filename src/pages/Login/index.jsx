@@ -11,7 +11,7 @@ import { validarLogin, validarSenha } from '../../utils/validadores';
 
 import EscolherCadastro from '../../components/Login/EscolherCadastro';
 
-import AuthService from '../../service/AuthService';
+import AuthService from '../../service/authService';
 
 const authService = new AuthService();
 

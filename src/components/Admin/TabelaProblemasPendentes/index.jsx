@@ -10,7 +10,7 @@ import {
 	Paper,
 } from '@mui/material';
 
-import { todosProblemasPendentes } from '../../../service/ProblemasService';
+import { todosProblemasPendentes } from '../../../service/problemasService';
 
 export default function TabelaProblemasPendentes() {
 	const [problema, setProblema] = useState([]);

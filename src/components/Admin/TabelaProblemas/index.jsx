@@ -10,7 +10,7 @@ import {
 	Paper,
 } from '@mui/material';
 
-import { todosProblemas } from '../../../service/ProblemasService';
+import { todosProblemas } from '../../../service/problemasService';
 
 export default function TabelaProblemas() {
 	const [problema, setProblema] = useState([]);

@@ -10,7 +10,7 @@ import {
 	Paper,
 } from '@mui/material';
 
-import { todasPrefeituras } from '../../../service/PrefeituraService';
+import { todasPrefeituras } from '../../../service/prefeituraService';
 
 export default function TabelaPrefeituras() {
 	const [prefeitura, setPrefeitura] = useState([]);
