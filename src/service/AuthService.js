@@ -1,4 +1,4 @@
-import api from './api';
+import api from './Api';
 
 export default class AuthService {
   async login(dados) {
