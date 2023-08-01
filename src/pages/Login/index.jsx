@@ -1,121 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { Grid, Typography, Alert, Box, IconButton } from '@mui/material';
+import { Context } from '../../context/UserContext';
+
+import { Grid, Typography, Alert, Stack, IconButton } from '@mui/material';
 import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
 
 import { LogoVertical } from '../../components/Logos/LogoVertical';
 import { BsArrowLeftSquare } from 'react-icons/bs';
 
-import { validarLogin, validarSenha } from '../../utils/validadores';
-
 import EscolherCadastro from '../../components/Login/EscolherCadastro';
 
-import AuthService from '../../service/authService';
-
-const authService = new AuthService();
-
 export default function Login() {
-  const [alert, setAlert] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({});
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+	const { login } = useContext(Context);
+	const [usuario, setUsuario] = useState('');
+	const [alert, setAlert] = useState(false);
 
-    try {
-      setLoading(true);
+	const handleChange = (e) => {
+		setUsuario({
+			...usuario,
+			[e.target.name]: e.target.value,
+		});
+	};
 
-      const response = await authService.login(form);
-      console.log('Usuário logado!', response);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			setAlert(true);
 
-      if (response) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('id', response.data.id);
-        localStorage.setItem('login', response.data.login);
+			// await login(usuario.login, usuario.senha);
 
-        navigate('/');
-        setAlert(true);
-        setTimeout(() => {
-          setAlert(false);
-        }, 3000);
-      }
+			setTimeout(() => {
+				login(usuario.login, usuario.senha);
+				setAlert(false);
+			}, 1000);
 
-      setLoading(false);
-    } catch (error) {
-      console.log('erro do Login', error);
-      alert('Erro ao logar usuário');
-    }
-  };
+			console.log('Logado com sucesso!');
 
-  const handleChange = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
+			setAlert(true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  const validadorInput = () => {
-    return validarLogin(form.login) && validarSenha(form.senha);
-  };
-
-  return (
-    <StyledBox>
-      <form>
-        <Grid container spacing={2}>
-          <Grid item xs={1}>
-            <Link to={`/`}>
-              <IconButton aria-label="delete" className="button-voltar-login">
-                <BsArrowLeftSquare />
-              </IconButton>
-            </Link>
-          </Grid>
-          <Grid item xs={12}>
-            <LogoVertical />
-          </Grid>
-          <Grid item xs={12}>
-            <StyledTextField1
-              name="login"
-              placeholder="Digite o seu login"
-              onChange={handleChange}
-              type="text"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <StyledTextField1
-              name="senha"
-              placeholder="Digite a sua senha"
-              onChange={handleChange}
-              type="password"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <StyledButton
-              type="submit"
-              onClick={handleSubmit}
-              disabled={loading || !validadorInput()}
-            >
-              Entrar
-            </StyledButton>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>Não possui conta?</Typography>
-            <EscolherCadastro />
-          </Grid>
-        </Grid>
-      </form>
-      {alert && (
-        <Box
-          sx={{
-            float: 'right',
-            padding: '1em',
-            marginTop: '480px',
-            marginRight: '-400px',
-          }}
-        >
-          <Alert sx={{}} variant="filled" severity="success">
-            Usuário logado com sucesso!
-          </Alert>
-        </Box>
-      )}
-    </StyledBox>
-  );
+	return (
+		<StyledBox>
+			<form onSubmit={handleSubmit}>
+				<Grid container spacing={2}>
+					<Grid item xs={1}>
+						<Link to={`/`}>
+							<IconButton aria-label="delete" className="button-voltar-login">
+								<BsArrowLeftSquare />
+							</IconButton>
+						</Link>
+					</Grid>
+					<Grid item xs={12}>
+						<LogoVertical />
+					</Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							text="Login"
+							type="text"
+							name="login"
+							placeholder="Digite o login"
+							onChange={handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							text="Senha"
+							type="password"
+							name="senha"
+							placeholder="Digite a senha"
+							onChange={handleChange}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<StyledButton input type="submit" value="Entrar">
+							Entrar
+						</StyledButton>
+					</Grid>
+					<Grid item xs={12}>
+						<Typography>Não possui conta?</Typography>
+						<EscolherCadastro />
+					</Grid>
+				</Grid>
+			</form>
+			{alert && (
+				<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+					<Alert variant="filled" severity="success">
+						Usuário logado com sucesso!
+					</Alert>
+				</Stack>
+			)}
+		</StyledBox>
+	);
 }

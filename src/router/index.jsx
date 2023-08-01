@@ -14,31 +14,26 @@ import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
 
 import NotPage from '../pages/NotPage';
 
-import ProtectedRoutes from './ProtectedRoutes';
+import { UserProvider } from '../context/UserContext';
 
 export const Router = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Reportar />} />
+	return (
+		<UserProvider>
+			<Routes>
+				<Route path="/" element={<Reportar />} />
 
-      <Route path="/login" element={<Login />} />
+				<Route path="/login" element={<Login />} />
 
-      <Route path="/denunciar" element={<Denunciar />} />
+				<Route path="/denunciar" element={<Denunciar />} />
 
-      <Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
+				<Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
 
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoutes>
-						<Admin />
-          </ProtectedRoutes>
-        }
-      />
+				<Route path="/admin" element={<Admin />} />
 
-      <Route path="/prefeitura/cadastrar" element={<CadastrarPrefeitura />} />
+				<Route path="/prefeitura/cadastrar" element={<CadastrarPrefeitura />} />
 
-      <Route path="*" element={<NotPage />} />
-    </Routes>
-  );
+				<Route path="*" element={<NotPage />} />
+			</Routes>
+		</UserProvider>
+	);
 };

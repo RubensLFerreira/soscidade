@@ -1,5 +1,7 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import useAuth from '../../service/useAuth';
 
 import {
 	AppBar,
@@ -13,6 +15,8 @@ import {
 	Button,
 	Tooltip,
 	MenuItem,
+	Stack,
+	Alert,
 } from '@mui/material/';
 
 import AdbIcon from '@mui/icons-material/Adb';
@@ -21,6 +25,19 @@ import { BiSolidBuildings } from 'react-icons/bi';
 export default function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+	const [alert, setAlert] = useState(false);
+	const navigate = useNavigate();
+
+	const { logout } = useAuth();
+
+	const handleLogout = () => {
+		setAlert(true);
+		setTimeout(() => {
+			logout();
+			setAlert(false);
+		}, 2000);
+	};
 
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
@@ -126,12 +143,29 @@ export default function Navbar() {
 								</Link>
 							</MenuItem>
 							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center">Logout </Typography>
+								<Typography textAlign="center" onClick={handleLogout}>
+									Logout{' '}
+								</Typography>
 							</MenuItem>
 						</Menu>
 					</Box>
 				</Toolbar>
 			</Container>
+			{alert && (
+				<Stack
+					sx={{
+						width: '300px',
+						position: 'absolute',
+						right: '0px',
+						margin: '8% 2% 0 0',
+					}}
+					spacing={2}
+				>
+					<Alert variant="filled" severity="success">
+						Logout com sucesso!
+					</Alert>
+				</Stack>
+			)}
 		</AppBar>
 	);
 }
