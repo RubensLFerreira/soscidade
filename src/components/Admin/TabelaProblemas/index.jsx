@@ -8,6 +8,7 @@ import {
 	TableHead,
 	TableRow,
 	Paper,
+	Button
 } from '@mui/material';
 
 import { todosProblemas } from '../../../service/problemasService';
@@ -41,10 +42,11 @@ export default function TabelaProblemas() {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							<TableCell>Status</TableCell>
+							<TableCell>Observação</TableCell>
 							<TableCell>Categoria</TableCell>
 							<TableCell>Cidadão</TableCell>
 							<TableCell>Prefeitura</TableCell>
+							<TableCell></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -53,10 +55,11 @@ export default function TabelaProblemas() {
 								key={problema.id}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 							>
-								<TableCell>{problema.status}</TableCell>
+								<TableCell>{problema.observacao}</TableCell>
 								<TableCell>{problema.categoria_id}</TableCell>
 								<TableCell>{problema.cidadao_id}</TableCell>
 								<TableCell>{problema.prefeitura_id}</TableCell>
+								<TableCell><Button>Editar</Button></TableCell>
 							</TableRow>
 						))}
 					</TableBody>

@@ -8,6 +8,7 @@ import {
 	TableHead,
 	TableRow,
 	Paper,
+	Button,
 } from '@mui/material';
 
 import { todosProblemasFinalizados } from '../../../service/problemasService';
@@ -42,23 +43,30 @@ export default function TabelaProblemasFinalizados() {
 					<TableHead>
 						<TableRow>
 							<TableCell>ID</TableCell>
+							<TableCell>Autor</TableCell>
 							<TableCell>Categoria</TableCell>
-							<TableCell>Cidadão</TableCell>
-							<TableCell>Prefeitura</TableCell>
+							<TableCell>Prefeitura responsável</TableCell>
+							<TableCell>Descrição</TableCell>
+							<TableCell></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{problema && problema.map((problema) => (
-							<TableRow
-								key={problema.id}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-							>
-								<TableCell>{problema.id}</TableCell>
-								<TableCell>{problema.categoria_id}</TableCell>
-								<TableCell>{problema.cidadao_id}</TableCell>
-								<TableCell>{problema.prefeitura_id}</TableCell>
-							</TableRow>
-						))}
+						{problema &&
+							problema.map((problema) => (
+								<TableRow
+									key={problema.id}
+									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+								>
+									<TableCell>{problema.id}</TableCell>
+									<TableCell>{problema.cidadao_id}</TableCell>
+									<TableCell>{problema.categoria_id}</TableCell>
+									<TableCell>{problema.prefeitura_id}</TableCell>
+									<TableCell>{problema.observacao}</TableCell>
+									<TableCell>
+										<Button>Editar</Button>
+									</TableCell>
+								</TableRow>
+							))}
 					</TableBody>
 				</Table>
 			</TableContainer>

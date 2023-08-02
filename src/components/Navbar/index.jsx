@@ -51,6 +51,18 @@ export default function Navbar() {
 		setAnchorElUser(null);
 	};
 
+	const handleDashboard = () => {
+		navigate('/admin');
+	};
+
+	const handlePerfil = () => {
+		navigate('/*');
+	};
+
+	const handleLogin = () => {
+		navigate('/login');
+	};
+
 	return (
 		<AppBar position="static" sx={{ height: '65px' }}>
 			<Container maxWidth="xl">
@@ -130,17 +142,17 @@ export default function Navbar() {
 							onClose={handleCloseUserMenu}
 						>
 							<MenuItem onClick={handleCloseUserMenu}>
-								<Link to={`/admin`}>
-									<Typography textAlign="center">Dashboard </Typography>
-								</Link>
+								<Typography textAlign="center" onClick={handleDashboard}>
+									Dashboard
+								</Typography>
+							</MenuItem>
+							<MenuItem onClick={handlePerfil}>
+								<Typography textAlign="center">Perfil</Typography>
 							</MenuItem>
 							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center">Perfil </Typography>
-							</MenuItem>
-							<MenuItem onClick={handleCloseUserMenu}>
-								<Link to={`/login`}>
-									<Typography textAlign="center">Login </Typography>
-								</Link>
+								<Typography textAlign="center" onClick={handleLogin}>
+									Login
+								</Typography>
 							</MenuItem>
 							<MenuItem onClick={handleCloseUserMenu}>
 								<Typography textAlign="center" onClick={handleLogout}>
@@ -161,7 +173,7 @@ export default function Navbar() {
 					}}
 					spacing={2}
 				>
-					<Alert variant="filled" severity="success">
+					<Alert variant="filled" severity="info">
 						Logout com sucesso!
 					</Alert>
 				</Stack>
