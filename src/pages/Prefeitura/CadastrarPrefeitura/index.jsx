@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { cadastrarPrefeitura } from '../../../service/prefeituraService';
 
@@ -7,168 +11,197 @@ import { Alert, Stack, Grid, IconButton } from '@mui/material';
 import { BsArrowLeftSquare } from 'react-icons/bs';
 
 import {
-  StyledBox,
-  StyledButton,
-  StyledTextField1,
-  StyledTypography,
-  StyledTypography2,
+	StyledBox,
+	StyledButton,
+	StyledTextField1,
+	StyledTypography,
+	StyledTypography2,
+	StyledAlert,
 } from './StyledPrefeitura';
 
+const schema = yup
+	.object({
+		nome: yup
+			.string()
+			.required('Nome é obrigatório!')
+			.min(3, 'No mínimo 3 caracteres'),
+		telefone: yup
+			.string()
+			.required('Telefone é obrigatório!')
+			.min(3, 'No mínimo 3 caracteres')
+			.max(11, 'No máximo 11 caracteres'),
+		email: yup.string().required('E-mail é obrigatório!'),
+		prefeito: yup
+			.string()
+			.required('Nome do prefeito é obrigatório!')
+			.min(3, 'No mínimo 3 caracteres'),
+		site: yup.string().required('Site é obrigatório!'),
+		login: yup
+			.string()
+			.required('Login é obrigatório!')
+			.min(3, 'No mínimo 3 caracteres'),
+		senha: yup
+			.string()
+			.typeError('Tipo de dado inválido!')
+			.required('Senha é obrigatória!')
+			.min(3, 'No mínimo 3 caracteres!'),
+	})
+	.required();
+
 export default function FormRegisterPrefeitura() {
-  const [alert, setAlert] = useState(false);
-  const [nome, setNome] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [email, setEmail] = useState('');
-  const [prefeito, setPrefeito] = useState('');
-  const [site, setSite] = useState('');
-  const [login, setLogin] = useState('');
-  const [senha, setSenha] = useState('');
+	const [alert, setAlert] = useState(false);
+	const navigate = useNavigate();
 
-  const prefeituraSubmit = async (event) => {
-    event.preventDefault();
-    await cadastrarPrefeitura(
-      nome,
-      telefone,
-      email,
-      prefeito,
-      site,
-      login,
-      senha
-    );
-    console.log(cadastrarPrefeitura);
-    setAlert(true);
-  };
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
-  return (
-    <StyledBox>
-      <Grid container spacing={2}>
-        <Grid item xs={1}>
-          <Link to={`/login`}>
-            <IconButton aria-label="back" className="button-voltar-login">
-              <BsArrowLeftSquare />
-            </IconButton>
-          </Link>
-        </Grid>
+	const handleOnSubmit = async (data) => {
+		try {
+			setAlert(true);
 
-        <Grid item xs={12}>
-          <StyledTypography>Cadastrar Prefeitura</StyledTypography>
-        </Grid>
+			await cadastrarPrefeitura(
+				data.nome,
+				data.telefone,
+				data.email,
+				data.prefeito,
+				data.site,
+				data.login,
+				data.senha
+			);
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Nome"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu nome"
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-          />
-        </Grid>
+			console.log(watch(data));
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Telefone"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu telefone"
-            value={telefone}
-            onChange={(event) => setTelefone(event.target.value)}
-          />
-        </Grid>
+			setTimeout(() => {
+				setAlert(false);
+			}, 1000);
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Email"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </Grid>
+			console.log('cadastrado com sucesso!');
+			setAlert(true);
+			navigate('/login');
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Prefeito"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu prefeito"
-            value={prefeito}
-            onChange={(event) => setPrefeito(event.target.value)}
-          />
-        </Grid>
+	return (
+		<StyledBox>
+			<form onSubmit={handleSubmit(handleOnSubmit)}>
+				<Grid container spacing={2}>
+					<Grid item xs={1}>
+						<Link to={`/login`}>
+							<IconButton aria-label="back" className="button-voltar-login">
+								<BsArrowLeftSquare />
+							</IconButton>
+						</Link>
+					</Grid>
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Site"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu site"
-            value={site}
-            onChange={(event) => setSite(event.target.value)}
-          />
-        </Grid>
+					<Grid item xs={12}>
+						<StyledTypography>Cadastrar Prefeitura</StyledTypography>
+					</Grid>
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Login"
-            variant="standard"
-            type="text"
-            required
-            placeholder="Digite seu login"
-            value={login}
-            onChange={(event) => setLogin(event.target.value)}
-          />
-        </Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Nome"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu nome"
+							{...register('nome')}
+						/>
+						<StyledAlert>{errors.nome?.message}</StyledAlert>
+					</Grid>
 
-        <Grid item xs={12}>
-          <StyledTextField1
-            id="standard-basic"
-            label="Senha"
-            variant="standard"
-            type="password"
-            required
-            placeholder="Digite sua senha"
-            value={senha}
-            onChange={(event) => setSenha(event.target.value)}
-          />
-        </Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Telefone"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu telefone"
+							{...register('telefone')}
+						/>
+						<StyledAlert>{errors.telefone?.message}</StyledAlert>
+					</Grid>
 
-        <Grid item xs={12}>
-          <StyledButton
-            variant="contained"
-            type="submit"
-            onClick={prefeituraSubmit}
-          >
-            Cadastrar
-          </StyledButton>
-        </Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Email"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu email"
+							{...register('email')}
+						/>
+						<StyledAlert>{errors.email?.message}</StyledAlert>
+					</Grid>
 
-        <Grid item xs={12}>
-          <StyledTypography2>
-            Possui conta? <Link to={`/Login`}>Login</Link>
-          </StyledTypography2>
-        </Grid>
-      </Grid>
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Prefeito"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu prefeito"
+							{...register('prefeito')}
+						/>
+						<StyledAlert>{errors.prefeito?.message}</StyledAlert>
+					</Grid>
 
-      {alert && (
-        <Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
-          <Alert variant="filled" severity="success">
-            Prefeitura cadastrada com sucesso!
-          </Alert>
-        </Stack>
-      )}
-    </StyledBox>
-  );
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Site"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu site"
+							{...register('site')}
+						/>
+						<StyledAlert>{errors.site?.message}</StyledAlert>
+					</Grid>
+
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Login"
+							variant="standard"
+							type="text"
+							placeholder="Digite seu login"
+							{...register('login')}
+						/>
+						<StyledAlert>{errors.login?.message}</StyledAlert>
+					</Grid>
+
+					<Grid item xs={12}>
+						<StyledTextField1
+							label="Senha"
+							variant="standard"
+							type="password"
+							placeholder="Digite sua senha"
+							{...register('senha')}
+						/>
+						<StyledAlert>{errors.senha?.message}</StyledAlert>
+					</Grid>
+
+					<Grid item xs={12}>
+						<StyledButton variant="contained" input type="submit">
+							Cadastrar
+						</StyledButton>
+					</Grid>
+
+					<Grid item xs={12}>
+						<StyledTypography2>
+							Possui conta? <Link to={`/Login`}>Login</Link>
+						</StyledTypography2>
+					</Grid>
+				</Grid>
+			</form>
+			{alert && (
+				<Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
+					<Alert variant="filled" severity="success">
+						Prefeitura cadastrada com sucesso!
+					</Alert>
+				</Stack>
+			)}
+		</StyledBox>
+	);
 }
