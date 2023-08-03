@@ -1,44 +1,66 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Context } from '../../context/UserContext';
 
-import { Grid, Typography, Alert, Stack, IconButton } from '@mui/material';
-import { StyledBox, StyledTextField1, StyledButton } from './StyledLogin';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { LogoVertical } from '../../components/Logos/LogoVertical';
 import { BsArrowLeftSquare } from 'react-icons/bs';
 
+import { Grid, Typography, Alert, Stack, IconButton } from '@mui/material';
+import {
+	StyledBox,
+	StyledTextField1,
+	StyledButton,
+	StyledAlert,
+} from './StyledLogin';
+
 import EscolherCadastro from '../../components/Login/EscolherCadastro';
 
+const schema = yup
+	.object({
+		login: yup
+			.string()
+			.required('Login é obrigatório!')
+			.min(3, 'No mínimo 3 caracteres'),
+		senha: yup
+			.string()
+			.typeError('Tipo de dado inválido!')
+			.required('Senha é obrigatória!')
+			.min(3, 'No mínimo 3 caracteres!')
+			.max(10, 'No máximo 10 caracteres!'),
+	})
+	.required();
+
 export default function Login() {
-	const navigate = useNavigate();
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
 	const { login } = useContext(Context);
-	const [usuario, setUsuario] = useState('');
 	const [alert, setAlert] = useState(false);
 
-	const handleChange = (e) => {
-		setUsuario({
-			...usuario,
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleOnSubmit = async (data) => {
 		try {
 			setAlert(true);
 
-			// await login(usuario.login, usuario.senha);
+			await login(data.login, data.senha);
+
+			console.log(watch(data));
 
 			setTimeout(() => {
-				login(usuario.login, usuario.senha);
 				setAlert(false);
 			}, 1000);
 
 			console.log('Logado com sucesso!');
-
 			setAlert(true);
 		} catch (error) {
 			console.log(error);
@@ -47,7 +69,7 @@ export default function Login() {
 
 	return (
 		<StyledBox>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit(handleOnSubmit)}>
 				<Grid container spacing={2}>
 					<Grid item xs={1}>
 						<Link to={`/`}>
@@ -65,8 +87,9 @@ export default function Login() {
 							type="text"
 							name="login"
 							placeholder="Digite o login"
-							onChange={handleChange}
+							{...register('login')}
 						/>
+						<StyledAlert>{errors.login?.message}</StyledAlert>
 					</Grid>
 					<Grid item xs={12}>
 						<StyledTextField1
@@ -74,8 +97,9 @@ export default function Login() {
 							type="password"
 							name="senha"
 							placeholder="Digite a senha"
-							onChange={handleChange}
+							{...register('senha')}
 						/>
+						<StyledAlert>{errors.senha?.message}</StyledAlert>
 					</Grid>
 					<Grid item xs={12}>
 						<StyledButton input type="submit" value="Entrar">

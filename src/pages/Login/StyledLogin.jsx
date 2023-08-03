@@ -1,4 +1,4 @@
-import { Box, TextField, Button, styled } from '@mui/material';
+import { Box, TextField, Button, styled, Typography } from '@mui/material';
 
 export const StyledBox  = styled(Box) ({
   backgroundColor: '#ffffff',
@@ -21,4 +21,9 @@ export const StyledButton = styled(Button) ({
   '&:hover': {
     backgroundColor: '#1e74e6'
   }
+});
+
+export const StyledAlert = styled(Typography) ({
+	fontSize: '10pt',
+	color: 'red',
 });
