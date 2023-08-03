@@ -36,3 +36,8 @@ export const StyledButton = styled(Button)({
     backgroundColor: '#1e74e6',
   },
 });
+
+export const StyledAlert = styled(Typography) ({
+	fontSize: '10pt',
+	color: 'red',
+});
