@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Table,
 	Typography,
@@ -8,22 +8,36 @@ import {
 	TableHead,
 	TableRow,
 	Paper,
-	Button
+	Button,
 } from '@mui/material';
 
 import { todosProblemas } from '../../../service/problemasService';
+import { todosCidadaos } from '../../../service/cidadaoService';
 
 export default function TabelaProblemas() {
 	const [problema, setProblema] = useState([]);
+	const [cidadao, setCidadao] = useState([]);
 
 	useEffect(() => {
 		const carregarProblemas = async () => {
-			const problemas = await todosProblemas();
-			setProblema(problemas.problemas);
-			console.log(problemas.problemas);
+			const resposta = await todosProblemas();
+			setProblema(resposta.problemas);
 		};
 		carregarProblemas();
 	}, []);
+
+	useEffect(() => {
+		const carregarCidadaos = async () => {
+			const resposta = await todosCidadaos();
+			setCidadao(resposta.cidadaos);
+		};
+		carregarCidadaos();
+	}, []);
+
+	const getNomeCidadao = (id) => {
+		const cidadaoEncontrado = cidadao.find((cidadao) => cidadao.id === id);
+		return cidadaoEncontrado ? cidadaoEncontrado.nome : 'Desconhecido';
+	};
 
 	return (
 		<>
@@ -57,9 +71,13 @@ export default function TabelaProblemas() {
 							>
 								<TableCell>{problema.observacao}</TableCell>
 								<TableCell>{problema.categoria_id}</TableCell>
-								<TableCell>{problema.cidadao_id}</TableCell>
+
+								<TableCell>{getNomeCidadao(problema.cidadao_id)}</TableCell>
+
 								<TableCell>{problema.prefeitura_id}</TableCell>
-								<TableCell><Button>Editar</Button></TableCell>
+								<TableCell>
+									<Button>Editar</Button>
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

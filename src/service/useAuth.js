@@ -21,7 +21,7 @@ export default function useAuth() {
 	async function login(login, senha) {
 		try {
 			const response = await api.post('/login', { login, senha });
-			authUsuario(response.data);
+			await authUsuario(response.data);
 
 			localStorage.setItem('usuario', JSON.stringify(response.data.usuario));
 			localStorage.setItem('token', JSON.stringify(response.data.token));
@@ -42,7 +42,7 @@ export default function useAuth() {
 		setAuthenticated(false);
 		localStorage.removeItem('token');
 		api.defaults.headers.Authorization = undefined;
-		navigate('/login');
+		navigate('/');
 	}
 
 	return { authenticated, loading, login, logout };

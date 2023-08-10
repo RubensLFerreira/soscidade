@@ -1,42 +1,51 @@
-import React, { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { FiUpload } from "react-icons/fi";
-import "./styles.css";
+import React, { useState } from 'react';
+import {
+	UploadContainer,
+	UploadInput,
+	UploadButton,
+	UploadPreviewContainer,
+	UploadPreview,
+	StyledTypography2,
+} from './StyledUpload';
 
+const FileUpload = () => {
+	
 
-const Drpzone = ({ onFileUploaded }) => {
-  const [selectedFileUrl, setSelectedFileUrl] = useState("");
+	const handleSendClick = () => {
+		// Aqui você fará a solicitação HTTP (POST) para enviar as imagens para o backend
+		// Certifique-se de substituir "https://seu-backend.com/upload" pelo URL do seu endpoint de upload no backend
 
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      console.log(acceptedFiles);
-      const file = acceptedFiles[0];
-      const fileurl = URL.createObjectURL(file);
+		selectedFiles.forEach((file) => {
+			axios
+				.post('https://seu-backend.com/upload', { image: file })
+				.then((response) => {
+					console.log('Imagem enviada com sucesso!', response);
+				})
+				.catch((error) => {
+					console.error('Erro ao enviar imagem:', error);
+				});
+		});
+	};
 
-      setSelectedFileUrl(fileurl);
-      onFileUploaded(file);
-    },
-    [onFileUploaded]
-  );
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*",
-  });
-
-  return (
-    <div className="dropzone" {...getRootProps()}>
-      <input {...getInputProps()} accept="image/*" />
-
-      {selectedFileUrl ? (
-        <img src={selectedFileUrl} alt="Point thumbnail" />
-      ) : (
-        <p>
-          <FiUpload />
-          Imagem do local
-        </p>
-      )}
-    </div>
-  );
+	return (
+		<>
+			<StyledTypography2>Enviar fotos</StyledTypography2>
+			<UploadContainer>
+				<UploadInput
+					type="file"
+					onChange={handleFileChange}
+					id="fileInput"
+					multiple
+				/>
+				<UploadButton htmlFor="fileInput">Selecionar arquivos</UploadButton>
+				<UploadPreviewContainer>
+					{selectedFiles.map((file, index) => (
+						<UploadPreview key={index} src={file} alt={`Preview ${index}`} />
+					))}
+				</UploadPreviewContainer>
+			</UploadContainer>
+		</>
+	);
 };
 
-export default Drpzone;
+export default FileUpload;

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { Context } from '../../context/UserContext';
 
 import useAuth from '../../service/useAuth';
 
@@ -23,6 +25,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { BiSolidBuildings } from 'react-icons/bi';
 
 export default function Navbar() {
+	const { authenticated } = useContext(Context);
+
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -149,16 +153,20 @@ export default function Navbar() {
 							<MenuItem onClick={handlePerfil}>
 								<Typography textAlign="center">Perfil</Typography>
 							</MenuItem>
-							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center" onClick={handleLogin}>
-									Login
-								</Typography>
-							</MenuItem>
-							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center" onClick={handleLogout}>
-									Logout{' '}
-								</Typography>
-							</MenuItem>
+
+							{authenticated ? (
+								<MenuItem onClick={handleCloseUserMenu}>
+									<Typography textAlign="center" onClick={handleLogout}>
+										Logout{' '}
+									</Typography>
+								</MenuItem>
+							) : (
+								<MenuItem onClick={handleCloseUserMenu}>
+									<Typography textAlign="center" onClick={handleLogin}>
+										Login
+									</Typography>
+								</MenuItem>
+							)}
 						</Menu>
 					</Box>
 				</Toolbar>
