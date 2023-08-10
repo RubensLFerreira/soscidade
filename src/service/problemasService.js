@@ -38,7 +38,7 @@ export const cadastrarProblema = async (problemaData) => {
 		formData.append('observacao', problemaData.observacao);
 		formData.append('status', problemaData.status);
 		formData.append('categoria', problemaData.categoria);
-		formData.append('cidadao', problemaData.cidadao);
+		formData.append('usuario', problemaData.usuario);
 		formData.append('prefeitura', problemaData.prefeitura);
 		formData.append('latitude', problemaData.latitude);
 		formData.append('longitude', problemaData.longitude);

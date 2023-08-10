@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -49,10 +50,11 @@ import Navbar from '../../components/Navbar';
 import { cadastrarProblema } from '../../service/problemasService';
 
 export default function Denunciar() {
-	const [alert, setAlert] = useState(false);
 	const navigate = useNavigate();
+	const [alert, setAlert] = useState(false);
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [categoria, setCategoria] = useState('1');
+	const [userId, setUserId] = useState(null);
 
 	const {
 		register,
@@ -62,10 +64,16 @@ export default function Denunciar() {
 		resolver: yupResolver(schema),
 	});
 
-	// function onFileChange(e) {
-	// 	console.log(Array.from(e.target.files));
-	// 	setUploadImage([...e.target.files]);
-	// }
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+
+		if (token) {
+			const decodedToken = jwt_decode(token);
+			const userId = decodedToken.id;
+
+			setUserId(userId);
+		}
+	}, []);
 
 	const handleOnSubmit = async (data) => {
 		try {
@@ -75,7 +83,7 @@ export default function Denunciar() {
 				observacao: data.observacao,
 				status: true,
 				categoria: categoria,
-				cidadao: 9,
+				usuario: userId,
 				prefeitura: 8,
 				latitude: '-23.563099',
 				longitude: '-46.656571',
@@ -112,7 +120,7 @@ export default function Denunciar() {
 					<StyledGrid>
 						<StyledTypography2>Título do problema</StyledTypography2>
 						<StyledTextField1
-							placeholder="Ex: Buraco na rua"
+							placeholder="Ex: Falta de iluminação na rua ABC"
 							variant="outlined"
 							{...register('observacao')}
 						/>
@@ -132,7 +140,7 @@ export default function Denunciar() {
 								<div
 									{...getRootProps()}
 									style={{
-										border: '2px dashed #cccccc',
+										border: '2px dashed #849afc',
 										padding: '20px',
 										backgroundColor: '#EAF3FF',
 										cursor: 'pointer',
