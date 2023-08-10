@@ -1,15 +1,29 @@
-import { Grid } from '@mui/material/';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Alert, Stack } from '@mui/material';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import Dropzone from 'react-dropzone';
 
-import { cadastrarProblema } from '../../service/problemasService';
+import {
+	Alert,
+	Stack,
+	Grid,
+	FormControl,
+	RadioGroup,
+	FormControlLabel,
+	Radio,
+} from '@mui/material';
+
+import {
+	Iluminacao,
+	Avenida,
+	Lixo,
+	Saneamento,
+	Sinalizacao,
+	Outros,
+} from '../../components/Denunciar';
 
 import {
 	StyledBox,
@@ -32,11 +46,13 @@ const schema = yup
 	.required();
 
 import Navbar from '../../components/Navbar';
+import { cadastrarProblema } from '../../service/problemasService';
 
 export default function Denunciar() {
 	const [alert, setAlert] = useState(false);
 	const navigate = useNavigate();
 	const [selectedImages, setSelectedImages] = useState([]);
+	const [categoria, setCategoria] = useState('1');
 
 	const {
 		register,
@@ -46,10 +62,10 @@ export default function Denunciar() {
 		resolver: yupResolver(schema),
 	});
 
-	function onFileChange(e) {
-		console.log(Array.from(e.target.files));
-		setUploadImage([...e.target.files]);
-	}
+	// function onFileChange(e) {
+	// 	console.log(Array.from(e.target.files));
+	// 	setUploadImage([...e.target.files]);
+	// }
 
 	const handleOnSubmit = async (data) => {
 		try {
@@ -58,7 +74,7 @@ export default function Denunciar() {
 			const problemaData = {
 				observacao: data.observacao,
 				status: true,
-				categoria: 1,
+				categoria: categoria,
 				cidadao: 9,
 				prefeitura: 8,
 				latitude: '-23.563099',
@@ -101,64 +117,142 @@ export default function Denunciar() {
 							{...register('observacao')}
 						/>
 						<StyledAlert>{errors.observacao?.message}</StyledAlert>
-
-						<StyledTypography2>Enviar fotos</StyledTypography2>
 					</StyledGrid>
-					{/* criar upload de imagens */}
-					<Dropzone
-						onDrop={(acceptedFiles) =>
-							setSelectedImages([...selectedImages, ...acceptedFiles])
-						}
-						accept="image/*"
-						multiple
-					>
-						{({ getRootProps, getInputProps }) => (
-							<div
-								className="dropzone-container"
-								{...getRootProps()}
-								style={{
-									border: '2px dashed #cccccc',
-									padding: '20px',
-									backgroundColor: '#EAF3FF',
-									cursor: 'pointer',
-									textAlign: 'center',
-									width: '95%',
-									height: '200px',
-									justifyContent: 'center',
-									alignItems: 'center',
-									display: 'flex',
-									margin: 'auto auto',
-								}}
-							>
-								<input {...getInputProps()} />
-								<p>
-									Arraste e solte as imagens aqui, ou clique para selecionar
-								</p>
-							</div>
-						)}
-					</Dropzone>
 
-					<div style={{ display: 'flex', textAlign: 'center' }}>
-						{selectedImages.map((image, index) => (
-							<div
-								key={index}
-								style={{ maxWidth: '100%', margin: '1rem auto' }}
-							>
-								<img
-									src={URL.createObjectURL(image)}
-									alt={`Preview ${index}`}
-									style={{ maxWidth: '80%', maxHeight: '80%' }}
-								/>
-							</div>
-						))}
-					</div>
+					<StyledGrid>
+						<StyledTypography2>Enviar fotos</StyledTypography2>
+						<Dropzone
+							onDrop={(acceptedFiles) =>
+								setSelectedImages([...selectedImages, ...acceptedFiles])
+							}
+							accept="image/*"
+							multiple
+						>
+							{({ getRootProps, getInputProps }) => (
+								<div
+									{...getRootProps()}
+									style={{
+										border: '2px dashed #cccccc',
+										padding: '20px',
+										backgroundColor: '#EAF3FF',
+										cursor: 'pointer',
+										textAlign: 'center',
+										height: '200px',
+										justifyContent: 'center',
+										alignItems: 'center',
+										display: 'flex',
+										margin: '0 auto 3rem auto',
+									}}
+								>
+									<input {...getInputProps()} />
+									<p>
+										Arraste e solte as imagens aqui, ou clique para selecionar
+									</p>
+								</div>
+							)}
+						</Dropzone>
+
+						<div
+							style={{
+								justifyContent: 'center',
+								alignItems: 'center',
+								display: 'flex',
+								margin: 'auto auto',
+								textAlign: 'center',
+							}}
+						>
+							{selectedImages.map((image, index) => (
+								<div
+									key={index}
+									style={{ maxWidth: '100%', margin: '0 auto 0 auto' }}
+								>
+									<img
+										src={URL.createObjectURL(image)}
+										alt={`Preview ${index}`}
+										style={{ maxWidth: '80%', maxHeight: '80%' }}
+									/>
+								</div>
+							))}
+						</div>
+					</StyledGrid>
+
 					<StyledGrid>
 						<StyledTypography2>Categoria do problema</StyledTypography2>
+						<FormControl component="fieldset">
+							<RadioGroup
+								row
+								name="categoria"
+								value={categoria}
+								onChange={(e) => setCategoria(e.target.value)}
+							>
+								<FormControlLabel
+									labelPlacement="top"
+									value={1}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Iluminacao />
+										</div>
+									}
+								/>
+								<FormControlLabel
+									labelPlacement="top"
+									value={2}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Avenida />
+										</div>
+									}
+								/>
+								<FormControlLabel
+									labelPlacement="top"
+									value={3}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Lixo />
+										</div>
+									}
+								/>
+
+								<FormControlLabel
+									labelPlacement="top"
+									value={4}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Saneamento />
+										</div>
+									}
+								/>
+
+								<FormControlLabel
+									labelPlacement="top"
+									value={5}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Sinalizacao />
+										</div>
+									}
+								/>
+								<FormControlLabel
+									labelPlacement="top"
+									value={6}
+									control={<Radio size="small" />}
+									label={
+										<div>
+											<Outros />
+										</div>
+									}
+								/>
+							</RadioGroup>
+						</FormControl>
 					</StyledGrid>
-					{/* criar um radio chamado categoria com as opções de iluminação e infraestrutura com os valores 1 e 2 respectivamente */}
+
 					<StyledGrid>
 						<StyledTypography2>Endereço</StyledTypography2>
-
 						<Grid container spacing={1}>
 							<Grid xs={8} item>
 								<StyledTextField1
@@ -209,7 +303,7 @@ export default function Denunciar() {
 					</StyledGrid>
 				</form>
 				{alert && (
-					<Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
+					<Stack sx={{ width: '100%', marginLeft: '1rem' }} spacing={2}>
 						<Alert variant="filled" severity="success">
 							Prefeitura cadastrada com sucesso!
 						</Alert>

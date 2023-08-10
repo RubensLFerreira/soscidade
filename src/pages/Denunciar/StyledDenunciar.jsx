@@ -15,7 +15,7 @@ export const StyledTypography1 = styled(Typography)({
 
 export const StyledTypography2 = styled(Typography)({
 	color: '#322153',
-	marginTop: '2rem',
+	margin: '2rem 0',
 	fontSize: '15pt',
 	fontWeight: 'bold',
 });
@@ -31,12 +31,12 @@ export const StyledTextField1 = styled(TextField)({
 export const StyledTextField2 = styled(TextField)({
 	width: '100%',
 	backgroundColor: '#EAF3FF',
-	marginBottom: '2rem',
+	marginBottom: 'rem',
 });
 
 export const StyledBox = styled(Box)({
 	backgroundColor: 'white',
-	maxWidth: '850px',
+	maxWidth: '900px',
 	width: '70vw',
 	margin: '2rem auto 1rem auto',
 	padding: '1rem 2rem',
@@ -44,7 +44,7 @@ export const StyledBox = styled(Box)({
 });
 
 export const StyledGrid = styled(Grid)({
-	margin: '2rem 0',
+	margin: '.5rem 0',
 	padding: '1rem',
 });
 
