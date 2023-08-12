@@ -19,7 +19,7 @@ export default function TabelaPrefeituras() {
 		const CarregarPrefeituras = async () => {
 			const prefeituras = await todasPrefeituras();
 			setPrefeitura(prefeituras.prefeituras);
-			console.log(prefeituras.prefeituras);
+			// console.log(prefeituras.prefeituras);
 		};
 		CarregarPrefeituras();
 	}, []);

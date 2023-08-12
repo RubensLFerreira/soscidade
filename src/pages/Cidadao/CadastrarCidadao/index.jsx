@@ -7,16 +7,17 @@ import * as yup from 'yup';
 
 import { cadastrarCidadao } from '../../../service/cidadaoService';
 
-import { Alert, Stack, Grid, IconButton } from '@mui/material';
-import { BsArrowLeftSquare } from 'react-icons/bs';
+import { Alert, Stack, Grid } from '@mui/material';
 
 import {
 	StyledBox,
 	StyledButton,
+	StyledButton2,
 	StyledTextField1,
 	StyledTypography,
 	StyledTypography2,
 	StyledAlert,
+	Container,
 } from './StyledCidadao';
 
 const schema = yup
@@ -93,140 +94,135 @@ export default function FormRegister() {
 	};
 
 	return (
-		<StyledBox>
-			<form onSubmit={handleSubmit(handleOnSubmit)}>
-				<Grid container spacing={2}>
-					<Grid item xs={1}>
-						<Link to={`/login`}>
-							<IconButton aria-label="back" className="button-voltar-login">
-								<BsArrowLeftSquare />
-							</IconButton>
-						</Link>
-					</Grid>
+		<Container>
+			<StyledBox>
+				<form onSubmit={handleSubmit(handleOnSubmit)}>
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<StyledTypography>Cadastrar cidadão</StyledTypography>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTypography>Cadastrar cidadão</StyledTypography>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Nome"
+								variant="standard"
+								type="text"
+								name="nome"
+								placeholder="Digite seu nome"
+								{...register('nome')}
+							/>
+							<StyledAlert>{errors.nome?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Nome"
-							variant="standard"
-							type="text"
-							name="nome"
-							placeholder="Digite seu nome"
-							{...register('nome')}
-						/>
-						<StyledAlert>{errors.nome?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Telefone"
+								variant="standard"
+								type="tel"
+								name="telefone"
+								placeholder="Digite seu telefone"
+								{...register('telefone')}
+							/>
+							<StyledAlert>{errors.telefone?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Telefone"
-							variant="standard"
-							type="tel"
-							name="telefone"
-							placeholder="Digite seu telefone"
-							{...register('telefone')}
-						/>
-						<StyledAlert>{errors.telefone?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Email"
+								variant="standard"
+								type="email"
+								name="email"
+								placeholder="Digite seu email"
+								{...register('email')}
+							/>
+							<StyledAlert>{errors.email?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Email"
-							variant="standard"
-							type="email"
-							name="email"
-							placeholder="Digite seu email"
-							{...register('email')}
-						/>
-						<StyledAlert>{errors.email?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="CPF"
+								variant="standard"
+								type="text"
+								name="cpf"
+								placeholder="Digite seu cpf"
+								{...register('cpf')}
+							/>
+							<StyledAlert>{errors.cpf?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="CPF"
-							variant="standard"
-							type="text"
-							name="cpf"
-							placeholder="Digite seu cpf"
-							{...register('cpf')}
-						/>
-						<StyledAlert>{errors.cpf?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Sexo"
+								variant="standard"
+								type="text"
+								name="sexo"
+								placeholder="Digite seu sexo"
+								{...register('sexo')}
+							/>
+							<StyledAlert>{errors.sexo?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Sexo"
-							variant="standard"
-							type="text"
-							name="sexo"
-							placeholder="Digite seu sexo"
-							{...register('sexo')}
-						/>
-						<StyledAlert>{errors.sexo?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								variant="standard"
+								type="date"
+								name="nascimento"
+								placeholder="Digite seu nascimento"
+								{...register('nascimento')}
+							/>
+							<StyledAlert>{errors.nascimento?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							variant="standard"
-							type="date"
-							name="nascimento"
-							placeholder="Digite seu nascimento"
-							{...register('nascimento')}
-						/>
-						<StyledAlert>{errors.nascimento?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Login"
+								variant="standard"
+								type="text"
+								name="login"
+								placeholder="Digite seu login"
+								{...register('login')}
+							/>
+							<StyledAlert>{errors.login?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Login"
-							variant="standard"
-							type="text"
-							name="login"
-							placeholder="Digite seu login"
-							{...register('login')}
-						/>
-						<StyledAlert>{errors.login?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								label="Senha"
+								variant="standard"
+								type="password"
+								name="senha"
+								placeholder="Digite sua senha"
+								{...register('senha')}
+							/>
+							<StyledAlert>{errors.senha?.message}</StyledAlert>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledTextField1
-							label="Senha"
-							variant="standard"
-							type="password"
-							name="senha"
-							placeholder="Digite sua senha"
-							{...register('senha')}
-						/>
-						<StyledAlert>{errors.senha?.message}</StyledAlert>
-					</Grid>
+						<Grid item xs={12}>
+							<StyledButton variant="contained" input type="submit">
+								Cadastrar
+							</StyledButton>
+						</Grid>
+						<Grid item xs={12}>
+							<Link to={`/`}>
+								<StyledButton2 variant="outlined">Cancelar</StyledButton2>
+							</Link>
+						</Grid>
 
-					<Grid item xs={12}>
-						<StyledButton
-							variant="contained"
-							input
-							type="submit"
-						>
-							Cadastrar
-						</StyledButton>
+						<Grid item xs={12}>
+							<StyledTypography2>
+								Possui conta? <Link to={`/Login`}>Login</Link>
+							</StyledTypography2>
+						</Grid>
 					</Grid>
-
-					<Grid item xs={12}>
-						<StyledTypography2>
-							Possui conta? <Link to={`/Login`}>Login</Link>
-						</StyledTypography2>
-					</Grid>
-				</Grid>
-			</form>
-			{alert && (
-				<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
-					<Alert variant="filled" severity="success">
-						Prefeitura cadastrada com sucesso!
-					</Alert>
-				</Stack>
-			)}
-		</StyledBox>
+				</form>
+				{alert && (
+					<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+						<Alert variant="filled" severity="success">
+							Prefeitura cadastrada com sucesso!
+						</Alert>
+					</Stack>
+				)}
+			</StyledBox>
+		</Container>
 	);
 }

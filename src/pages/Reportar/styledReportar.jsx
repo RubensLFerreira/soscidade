@@ -1,9 +1,19 @@
 import { Grid, Button, Box, Typography, styled } from '@mui/material';
 
+export const Container = styled('div')({
+	backgroundColor: '#f5f5f5',
+	maxWidth: '100vw',
+	minHeight: '100vh',
+	padding: '1rem',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+});
+
 export const StyledBox = styled(Box)({
   maxWidth: '1300px',
   width: '80vw',
-  margin: '2rem auto 1rem auto',
+  margin: 'auto auto',
 });
 
 export const StyledGrid = styled(Grid)({

@@ -145,21 +145,24 @@ export default function Navbar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							<MenuItem onClick={handleCloseUserMenu}>
-								<Typography textAlign="center" onClick={handleDashboard}>
-									Dashboard
-								</Typography>
-							</MenuItem>
-							<MenuItem onClick={handlePerfil}>
-								<Typography textAlign="center">Perfil</Typography>
-							</MenuItem>
-
 							{authenticated ? (
-								<MenuItem onClick={handleCloseUserMenu}>
-									<Typography textAlign="center" onClick={handleLogout}>
-										Logout{' '}
-									</Typography>
-								</MenuItem>
+								<>
+									<MenuItem onClick={handleCloseUserMenu}>
+										<Typography textAlign="center" onClick={handleDashboard}>
+											Dashboard
+										</Typography>
+									</MenuItem>
+
+									<MenuItem onClick={handlePerfil}>
+										<Typography textAlign="center">Perfil</Typography>
+									</MenuItem>
+
+									<MenuItem onClick={handleCloseUserMenu}>
+										<Typography textAlign="center" onClick={handleLogout}>
+											Logout{' '}
+										</Typography>
+									</MenuItem>
+								</>
 							) : (
 								<MenuItem onClick={handleCloseUserMenu}>
 									<Typography textAlign="center" onClick={handleLogin}>

@@ -20,7 +20,7 @@ export default function TabelaCidadaos() {
 		const CarregarCidadaos = async () => {
 			const cidadaos = await todosCidadaos();
 			setCidadao(cidadaos.cidadaos);
-			console.log(cidadaos.cidadaos);
+			// console.log(cidadaos.cidadaos);
 		};
 		CarregarCidadaos();
 	}, []);

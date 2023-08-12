@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Table,
 	Typography,
@@ -12,18 +12,60 @@ import {
 } from '@mui/material';
 
 import { todosProblemasPendentes } from '../../../service/problemasService';
+import { todasPrefeituras } from '../../../service/prefeituraService';
+import { todosUsuarios } from '../../../service/usuarioService';
 
 export default function TabelaProblemasPendentes() {
 	const [problema, setProblema] = useState([]);
+	const [usuario, setUsuario] = useState([]);
+	const [prefeitura, setPrefeitura] = useState([]);
+	const [categorias, setCategorias] = useState([
+		{ id: 1, nome: 'Iluminação' },
+		{ id: 2, nome: 'Avenida' },
+		{ id: 3, nome: 'Lixo' },
+		{ id: 4, nome: 'Saneamento' },
+		{ id: 5, nome: 'Sinalização' },
+		{ id: 6, nome: 'Outros' },
+	]);
 
 	useEffect(() => {
 		const carregarProblemas = async () => {
 			const problemas = await todosProblemasPendentes();
 			setProblema(problemas.problemas);
-			console.log(problemas.problemas);
 		};
 		carregarProblemas();
+
+		const carregarUsuarios = async () => {
+			const response = await todosUsuarios();
+			setUsuario(response.usuarios);
+		};
+		carregarUsuarios();
+
+		const CarregarPrefeituras = async () => {
+			const response = await todasPrefeituras();
+			setPrefeitura(response.prefeituras);
+		};
+		CarregarPrefeituras();
 	}, []);
+
+	const getUsuario = (usuarioId) => {
+		const user = usuario.find((usr) => usr.id === usuarioId);
+		return user ? user.nome : 'usuário não encontrado';
+	};
+
+	const getCategoria = (categoriaId) => {
+		const categoria = categorias.find((cat) => cat.id === categoriaId);
+		return categoria ? categoria.nome : 'Categoria não encontrada';
+	};
+
+	const getNomePrefeitura = (prefeituraId) => {
+		const prefeituraEncontrada = prefeitura.find(
+			(pref) => pref.id === prefeituraId
+		);
+		return prefeituraEncontrada
+			? prefeituraEncontrada['usuario'].nome
+			: 'Prefeitura não encontrada';
+	};
 
 	return (
 		<>
@@ -58,9 +100,12 @@ export default function TabelaProblemasPendentes() {
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 								>
 									<TableCell>{problema.id}</TableCell>
-									<TableCell>{problema.cidadao_id}</TableCell>
-									<TableCell>{problema.categoria_id}</TableCell>
-									<TableCell>{problema.prefeitura_id}</TableCell>
+									<TableCell>{getUsuario(problema.usuario_id)}</TableCell>
+									<TableCell>{getCategoria(problema.categoria_id)}</TableCell>
+									<TableCell>
+										{getNomePrefeitura(problema.prefeitura_id)}
+									</TableCell>
+
 									<TableCell>{problema.observacao}</TableCell>
 									<TableCell>
 										<Button>Editar</Button>

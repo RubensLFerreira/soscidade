@@ -8,14 +8,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { LogoVertical } from '../../components/Logos/LogoVertical';
-import { BsArrowLeftSquare } from 'react-icons/bs';
 
-import { Grid, Typography, Alert, Stack, IconButton } from '@mui/material';
+import { Grid, Typography, Alert, Stack } from '@mui/material';
 import {
 	StyledBox,
 	StyledTextField1,
 	StyledButton,
+	StyledButton2,
 	StyledAlert,
+	Container,
 } from './StyledLogin';
 
 import EscolherCadastro from '../../components/Login/EscolherCadastro';
@@ -68,57 +69,59 @@ export default function Login() {
 	};
 
 	return (
-		<StyledBox>
-			<form onSubmit={handleSubmit(handleOnSubmit)}>
-				<Grid container spacing={2}>
-					<Grid item xs={1}>
-						<Link to={`/`}>
-							<IconButton aria-label="delete" className="button-voltar-login">
-								<BsArrowLeftSquare />
-							</IconButton>
-						</Link>
+		<Container>
+			<StyledBox>
+				<form onSubmit={handleSubmit(handleOnSubmit)}>
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<LogoVertical />
+						</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								text="Login"
+								type="text"
+								name="login"
+								placeholder="Digite o login"
+								{...register('login')}
+							/>
+							<StyledAlert>{errors.login?.message}</StyledAlert>
+						</Grid>
+						<Grid item xs={12}>
+							<StyledTextField1
+								text="Senha"
+								type="password"
+								name="senha"
+								placeholder="Digite a senha"
+								{...register('senha')}
+							/>
+							<StyledAlert>{errors.senha?.message}</StyledAlert>
+						</Grid>
+						<Grid item xs={12}>
+							<StyledButton input type="submit" value="Entrar">
+								Entrar
+							</StyledButton>
+						</Grid>
+
+						<Grid item xs={12}>
+							<Link to={`/`}>
+								<StyledButton2 variant="outlined">Cancelar</StyledButton2>
+							</Link>
+						</Grid>
+
+						<Grid item xs={12}>
+							<Typography>Não possui conta?</Typography>
+							<EscolherCadastro />
+						</Grid>
 					</Grid>
-					<Grid item xs={12}>
-						<LogoVertical />
-					</Grid>
-					<Grid item xs={12}>
-						<StyledTextField1
-							text="Login"
-							type="text"
-							name="login"
-							placeholder="Digite o login"
-							{...register('login')}
-						/>
-						<StyledAlert>{errors.login?.message}</StyledAlert>
-					</Grid>
-					<Grid item xs={12}>
-						<StyledTextField1
-							text="Senha"
-							type="password"
-							name="senha"
-							placeholder="Digite a senha"
-							{...register('senha')}
-						/>
-						<StyledAlert>{errors.senha?.message}</StyledAlert>
-					</Grid>
-					<Grid item xs={12}>
-						<StyledButton input type="submit" value="Entrar">
-							Entrar
-						</StyledButton>
-					</Grid>
-					<Grid item xs={12}>
-						<Typography>Não possui conta?</Typography>
-						<EscolherCadastro />
-					</Grid>
-				</Grid>
-			</form>
-			{alert && (
-				<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
-					<Alert variant="filled" severity="success">
-						Usuário logado com sucesso!
-					</Alert>
-				</Stack>
-			)}
-		</StyledBox>
+				</form>
+				{alert && (
+					<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+						<Alert variant="filled" severity="success">
+							Usuário logado com sucesso!
+						</Alert>
+					</Stack>
+				)}
+			</StyledBox>
+		</Container>
 	);
 }

@@ -102,7 +102,7 @@ export default function Denunciar() {
 
 			console.log('Problema relatado com sucesso!');
 			setAlert(true);
-			navigate('/denunciar');
+			navigate('/');
 		} catch (error) {
 			console.log(error);
 		}
