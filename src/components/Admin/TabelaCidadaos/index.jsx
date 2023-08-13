@@ -8,10 +8,13 @@ import {
 	TableHead,
 	TableRow,
 	Paper,
+	Button
 } from '@mui/material';
 
 import { useState, useEffect } from 'react';
 import { todosCidadaos } from '../../../service/cidadaoService';
+
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 export default function TabelaCidadaos() {
 	const [cidadao, setCidadao] = useState([]);
@@ -46,6 +49,7 @@ export default function TabelaCidadaos() {
 							<TableCell align="right">Nome</TableCell>
 							<TableCell align="right">CPF</TableCell>
 							<TableCell align="right">Email</TableCell>
+							<TableCell align="right"></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -60,6 +64,9 @@ export default function TabelaCidadaos() {
 								<TableCell align="right">{cidadao.usuario['nome']}</TableCell>
 								<TableCell align="right">{cidadao.cpf}</TableCell>
 								<TableCell align="right">{cidadao.usuario['email']}</TableCell>
+								<TableCell>
+									<Button><EditOutlinedIcon /></Button>
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

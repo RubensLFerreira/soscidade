@@ -39,7 +39,7 @@ export default function Admin() {
 			<StyledBox>
 				<StyledGrid container>
 					<StyledGrid1>
-						<StyledTypography1>Dashboard</StyledTypography1>
+						<StyledTypography1>Dashboard (Admin)</StyledTypography1>
 						<InputSearch />
 
 						<div style={{ margin: '2rem 0' }}>

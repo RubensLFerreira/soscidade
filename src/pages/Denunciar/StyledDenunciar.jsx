@@ -5,6 +5,7 @@ import {
 	Typography,
 	TextField,
 	Button,
+	Autocomplete
 } from '@mui/material';
 
 export const StyledTypography1 = styled(Typography)({
@@ -29,6 +30,12 @@ export const StyledTextField1 = styled(TextField)({
 });
 
 export const StyledTextField2 = styled(TextField)({
+	width: '100%',
+	backgroundColor: '#EAF3FF',
+	marginBottom: 'rem',
+});
+
+export const StyledTextField3 = styled(Autocomplete)({
 	width: '100%',
 	backgroundColor: '#EAF3FF',
 	marginBottom: 'rem',
@@ -63,7 +70,7 @@ export const StyledBox2 = styled(Box)({
 
 export const StyledButton = styled(Button)({
 	width: '200px',
-	height: '60px',
+	height: '50px',
 	display: 'flex',
 	marginInlineStart: 'auto',
 	color: '#f5f5f5',

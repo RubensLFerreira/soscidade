@@ -43,6 +43,7 @@ export default function useAuth() {
 		localStorage.removeItem('token');
 		api.defaults.headers.Authorization = undefined;
 		navigate('/');
+		window.location.reload();
 	}
 
 	return { authenticated, loading, login, logout };

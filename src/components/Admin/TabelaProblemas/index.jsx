@@ -11,8 +11,9 @@ import {
 	Button,
 } from '@mui/material';
 
-import { todosProblemas } from '../../../service/problemasService';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
+import { todosProblemas } from '../../../service/problemasService';
 import { todasPrefeituras } from '../../../service/prefeituraService';
 import { todosUsuarios } from '../../../service/usuarioService';
 
@@ -109,7 +110,9 @@ export default function TabelaProblemasFinalizadas() {
 
 									<TableCell>{problema.observacao}</TableCell>
 									<TableCell>
-										<Button>Editar</Button>
+										<Button>
+											<EditOutlinedIcon />
+										</Button>
 									</TableCell>
 								</TableRow>
 							))}

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
+import { Context } from '../../context/UserContext';
 import Dropzone from 'react-dropzone';
 
 import {
@@ -15,6 +15,8 @@ import {
 	RadioGroup,
 	FormControlLabel,
 	Radio,
+	TextField,
+	Button,
 } from '@mui/material';
 
 import {
@@ -34,6 +36,7 @@ import {
 	StyledTextField1,
 	StyledButton,
 	StyledAlert,
+	StyledTextField3,
 } from './StyledDenunciar';
 
 const schema = yup
@@ -48,6 +51,7 @@ const schema = yup
 
 import Navbar from '../../components/Navbar';
 import { cadastrarProblema } from '../../service/problemasService';
+import { todasPrefeituras } from '../../service/prefeituraService';
 
 export default function Denunciar() {
 	const navigate = useNavigate();
@@ -55,6 +59,10 @@ export default function Denunciar() {
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [categoria, setCategoria] = useState('1');
 	const [userId, setUserId] = useState(null);
+	const [opcoes, setOpcoes] = useState([]);
+	const [opcaoId, setOpcaoId] = useState('');
+
+	const { authenticated } = useContext(Context);
 
 	const {
 		register,
@@ -75,16 +83,38 @@ export default function Denunciar() {
 		}
 	}, []);
 
+	useEffect(() => {
+		const CarregarPrefeituras = async () => {
+			try {
+				const response = await todasPrefeituras();
+				setOpcoes(response.prefeituras);
+				console.log(response.prefeituras);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		CarregarPrefeituras();
+	}, []);
+
+	const handleOptionChange = (event, value) => {
+		if (value) {
+			setOpcaoId(value ? value.id : '');
+		} else {
+			setOpcaoId('');
+		}
+		console.log(value.id);
+	};
+
 	const handleOnSubmit = async (data) => {
 		try {
-			setAlert(true);
+			await setAlert(true);
 
 			const problemaData = {
 				observacao: data.observacao,
 				status: true,
 				categoria: categoria,
 				usuario: userId,
-				prefeitura: 8,
+				prefeitura: opcaoId,
 				latitude: '-23.563099',
 				longitude: '-46.656571',
 				rua: data.rua,
@@ -101,7 +131,7 @@ export default function Denunciar() {
 			}, 1000);
 
 			console.log('Problema relatado com sucesso!');
-			setAlert(true);
+			await setAlert(true);
 			navigate('/');
 		} catch (error) {
 			console.log(error);
@@ -262,7 +292,7 @@ export default function Denunciar() {
 					<StyledGrid>
 						<StyledTypography2>Endereço</StyledTypography2>
 						<Grid container spacing={1}>
-							<Grid xs={8} item>
+							<Grid xs={7} item>
 								<StyledTextField1
 									label="Cidade"
 									placeholder="Ex: Cedro"
@@ -272,14 +302,24 @@ export default function Denunciar() {
 								<StyledAlert>{errors.cidade?.message}</StyledAlert>
 							</Grid>
 
-							<Grid xs={4} item>
+							<Grid xs={2} item>
 								<StyledTextField1
 									label="UF"
-									placeholder="Ex: Ceará"
+									placeholder="Ex: CE"
 									variant="outlined"
 									{...register('uf')}
 								/>
 								<StyledAlert>{errors.uf?.message}</StyledAlert>
+							</Grid>
+
+							<Grid xs={3} item>
+								<StyledTextField1
+									label="CEP"
+									placeholder="Ex: 63400000"
+									variant="outlined"
+									// {...register('uf')}
+								/>
+								{/* <StyledAlert>{errors.uf?.message}</StyledAlert> */}
 							</Grid>
 
 							<Grid xs={6} item>
@@ -305,10 +345,32 @@ export default function Denunciar() {
 					</StyledGrid>
 
 					<StyledGrid>
-						<StyledButton input type="submit">
-							Reportar problema
-						</StyledButton>
+						<StyledTypography2>Selecione a prefeitura</StyledTypography2>
+						<Grid xs={12} item>
+							<StyledTextField3
+								id="combo-box-demo"
+								options={opcoes}
+								getOptionLabel={(option) => option.usuario.nome}
+								onChange={handleOptionChange}
+								renderInput={(params) => (
+									<TextField {...params} label="Selecione uma opção" />
+								)}
+							/>
+						</Grid>
 					</StyledGrid>
+					{authenticated ? (
+						<StyledGrid>
+							<StyledButton input type="submit">
+								Reportar problema
+							</StyledButton>
+						</StyledGrid>
+					) : (
+						<StyledGrid>
+							<Button variant="contained" disabled>
+								Login necessário
+							</Button>
+						</StyledGrid>
+					)}
 				</form>
 				{alert && (
 					<Stack sx={{ width: '100%', marginLeft: '1rem' }} spacing={2}>

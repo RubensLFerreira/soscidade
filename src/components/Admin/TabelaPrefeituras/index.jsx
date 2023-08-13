@@ -8,7 +8,10 @@ import {
 	TableHead,
 	TableRow,
 	Paper,
+	Button
 } from '@mui/material';
+
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 import { todasPrefeituras } from '../../../service/prefeituraService';
 
@@ -42,9 +45,10 @@ export default function TabelaPrefeituras() {
 					<TableHead>
 						<TableRow>
 							<TableCell>ID</TableCell>
-							<TableCell align="right">Nome</TableCell>
+							<TableCell align="right">Prefeitura</TableCell>
 							<TableCell align="right">Site</TableCell>
 							<TableCell align="right">Email</TableCell>
+							<TableCell align="right"></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -59,11 +63,14 @@ export default function TabelaPrefeituras() {
 								<TableCell align="right">
 									{prefeitura.usuario['nome']}
 								</TableCell>
-								<TableCell align="right">
-									{prefeitura.site}
-									</TableCell>
+								<TableCell align="right">{prefeitura.site}</TableCell>
 								<TableCell align="right">
 									{prefeitura.usuario['email']}
+								</TableCell>
+								<TableCell>
+									<Button>
+										<EditOutlinedIcon />
+									</Button>
 								</TableCell>
 							</TableRow>
 						))}
