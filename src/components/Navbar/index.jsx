@@ -115,19 +115,19 @@ export default function Navbar() {
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						<Link to={'/'}>
 							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
-								Inicio
+								Home
 							</Button>
 						</Link>
 
-						<Link to={'/'}>
+						<Link to={'/informacao'}>
+							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
+								Quem somos
+							</Button>
+						</Link>
+
+						<Link to={'/atendimento'}>
 							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
 								Canais de atendimento
-							</Button>
-						</Link>
-
-						<Link to={'/'}>
-							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
-								Acesso à informação
 							</Button>
 						</Link>
 					</Box>
@@ -149,7 +149,7 @@ export default function Navbar() {
 									aria-haspopup="true"
 									aria-expanded={open ? 'true' : undefined}
 								>
-									<Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+									<Avatar sx={{ width: 32, height: 32 }}>?</Avatar>
 								</IconButton>
 							</Tooltip>
 						</Box>
