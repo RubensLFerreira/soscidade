@@ -19,22 +19,20 @@ export const StyledGrid = styled(Grid)({
 
 export const StyledGrid1 = styled(Grid)({
 	gridArea: '1 / 1 / 3 / 2',
-	// backgroundColor: '#fc9a9a',
+	maxHeight: '50%',
 	borderRadius: '10px 0 0 10px',
 });
 
 export const StyledGrid2 = styled(Grid)({
 	gridArea: '1 / 2 / 2 / 3',
-	// backgroundColor: '#9ad8fc',
-	height: '100%',
+	maxHeight: '50%',
 	borderRadius: '0 10px 0 0',
 });
 
 export const StyledGrid3 = styled(Grid)({
 	gridArea: '2 / 2 / 3 / 3',
-	// backgroundColor: '#9ad8fc',
 	borderRadius: '0 0 10px 0',
-	height: '100%',
+	maxHeight: '50%',
 });
 
 export const StyledTypography1 = styled(Typography)({

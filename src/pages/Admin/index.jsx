@@ -5,6 +5,7 @@ import TabelaProblemas from '../../components/Admin/TabelaProblemas';
 import TabelaProblemasFinalizados from '../../components/Admin/TabelaProblemasFinalizados';
 import TabelaProblemasPendentes from '../../components/Admin/TabelaProblemasPendentes';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 import {
 	StyledBox,
@@ -19,7 +20,7 @@ import {
 
 import { useState } from 'react';
 
-import { ListItem, ListItemText, Divider, Typography } from '@mui/material';
+import { ListItem, ListItemText, Divider } from '@mui/material';
 
 export default function Admin() {
 	const [buttonAtive1, setButtonAtive1] = useState('button1');
@@ -98,6 +99,8 @@ export default function Admin() {
 					</StyledGrid3>
 				</StyledGrid>
 			</StyledBox>
+
+			<Footer />
 		</>
 	);
 }
