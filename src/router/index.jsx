@@ -8,6 +8,8 @@ import Denunciar from '../pages/Denunciar';
 
 import Admin from '../pages/Admin';
 
+import DashboardCidadao from '../pages/Usuario';
+
 import CadastrarCidadao from '../pages/Cidadao/CadastrarCidadao';
 
 import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
@@ -27,6 +29,8 @@ export const Router = () => {
 				<Route path="/denunciar" element={<Denunciar />} />
 
 				<Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
+
+				<Route path="/cidadao/dashboard" element={<DashboardCidadao />} />
 
 				<Route path="/admin" element={<Admin />} />
 
