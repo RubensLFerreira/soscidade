@@ -53,7 +53,7 @@ export default function Navbar() {
 	};
 
 	const handleDashboard = () => {
-		navigate('/admin');
+		navigate('/cidadao/dashboard');
 	};
 
 	const handlePerfil = () => {
