@@ -7,7 +7,15 @@ import * as yup from 'yup';
 
 import { cadastrarCidadao } from '../../../service/cidadaoService';
 
-import { Alert, Stack, Grid } from '@mui/material';
+import {
+	Alert,
+	Stack,
+	Grid,
+	Select,
+	MenuItem,
+	InputLabel,
+	FormControl,
+} from '@mui/material';
 
 import {
 	StyledBox,
@@ -18,6 +26,7 @@ import {
 	StyledTypography2,
 	StyledAlert,
 	Container,
+	StyledTextField2,
 } from './StyledCidadao';
 
 const schema = yup
@@ -150,7 +159,7 @@ export default function FormRegister() {
 							<StyledAlert>{errors.cpf?.message}</StyledAlert>
 						</Grid>
 
-						<Grid item xs={12}>
+						{/* <Grid item xs={12}>
 							<StyledTextField1
 								label="Sexo"
 								variant="standard"
@@ -159,6 +168,29 @@ export default function FormRegister() {
 								placeholder="Digite seu sexo"
 								{...register('sexo')}
 							/>
+							<StyledAlert>{errors.sexo?.message}</StyledAlert>
+						</Grid> */}
+
+						<Grid item xs={12}>
+							<FormControl fullWidth>
+								<InputLabel
+									id="demo-simple-select-label"
+									style={{ marginLeft: '1.5rem' }}
+								>
+									Sexo
+								</InputLabel>
+								<StyledTextField2
+									id="demo-simple-select"
+									name="sexo"
+									label="Sexo"
+									labelId="demo-simple-select-label"
+									variant="standard"
+									{...register('sexo')}
+								>
+									<MenuItem value={1}>Masculino</MenuItem>
+									<MenuItem value={2}>Feminino</MenuItem>
+								</StyledTextField2>
+							</FormControl>
 							<StyledAlert>{errors.sexo?.message}</StyledAlert>
 						</Grid>
 

@@ -1,4 +1,4 @@
-import { Box, TextField, Button, styled, Typography } from '@mui/material';
+import { Box, TextField, Button, styled, Select, Typography } from '@mui/material';
 
 export const Container = styled('div')({
 	backgroundColor: '#f5f5f5',
@@ -21,6 +21,11 @@ export const StyledBox = styled(Box)({
 
 export const StyledTextField1 = styled(TextField)({
 	width: '80%',
+});
+
+export const StyledTextField2 = styled(Select)({
+	width: '80%',
+	margin: 'auto auto'
 });
 
 export const StyledTypography = styled(Typography)({
