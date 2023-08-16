@@ -6,6 +6,10 @@ import Reportar from '../pages/Reportar';
 
 import Denunciar from '../pages/Denunciar';
 
+import Atendimento from '../pages/Atendimento';
+
+import Informacao from '../pages/Informacao';
+
 import Admin from '../pages/Admin';
 
 import DashboardCidadao from '../pages/Usuario';
@@ -27,6 +31,10 @@ export const Router = () => {
 				<Route path="/login" element={<Login />} />
 
 				<Route path="/denunciar" element={<Denunciar />} />
+
+				<Route path="/atendimento" element={<Atendimento />} />
+
+				<Route path="/informacao" element={<Informacao />} />
 
 				<Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
 
