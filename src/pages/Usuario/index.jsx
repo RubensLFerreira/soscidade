@@ -6,6 +6,7 @@ import TabelaProblemasPendentes from '../../components/Admin/TabelaProblemasPend
 import TabelaProblemasFinalizados from '../../components/Admin/TabelaProblemasFinalizados';
 import TabelaDashBoardUsuario from '../../components/TabelaDashboardUsuario';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 import {
 	StyledBox,
@@ -84,10 +85,13 @@ export default function Dashboardusuario() {
 					</StyledGrid2>
 					<StyledGrid3>
 						{buttonAtive2 === 'button4' && <TabelaProblemasFinalizados />}
-						{buttonAtive2 === 'button5' && <TabelaProblemasPendentes />}
+						{buttonAtive2 === 'button5' && 'Local reservado para a tabela'}
+						{/* {buttonAtive2 === 'button5' && <TabelaProblemasPendentes />} */}
 					</StyledGrid3>
 				</StyledGrid>
 			</StyledBox>
+
+			<Footer />
 		</>
 	);
 }
