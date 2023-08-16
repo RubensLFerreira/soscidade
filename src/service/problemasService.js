@@ -10,6 +10,16 @@ export const todosProblemas = async () => {
 	}
 };
 
+export const todasDenunciasUsuario = async (id) => {
+	try {
+		const problemas = await api.get(`/problemas/usuario/${id}`);
+		return problemas.data;
+	} catch (error) {
+		console.log('Erro no ProblemasServices!');
+		return { message: error };
+	}
+};
+
 export const todosProblemasPendentes = async () => {
 	try {
 		const problemas = await api.get('/problemas/pendentes');
@@ -33,7 +43,7 @@ export const todosProblemasFinalizados = async () => {
 export const cadastrarProblema = async (problemaData) => {
 	try {
 		const formData = new FormData();
-		console.log(problemaData)
+		console.log(problemaData);
 
 		formData.append('observacao', problemaData.observacao);
 		formData.append('status', problemaData.status);
