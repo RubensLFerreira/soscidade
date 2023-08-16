@@ -50,6 +50,7 @@ const schema = yup
 	.required();
 
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import { cadastrarProblema } from '../../service/problemasService';
 import { todasPrefeituras } from '../../service/prefeituraService';
 
@@ -380,6 +381,8 @@ export default function Denunciar() {
 					</Stack>
 				)}
 			</StyledBox>
+
+			<Footer />
 		</>
 	);
 }

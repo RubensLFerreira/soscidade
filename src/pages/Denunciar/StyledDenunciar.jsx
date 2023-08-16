@@ -45,7 +45,7 @@ export const StyledBox = styled(Box)({
 	backgroundColor: 'white',
 	maxWidth: '900px',
 	width: '70vw',
-	margin: '2rem auto 1rem auto',
+	margin: '2rem auto 5rem auto',
 	padding: '1rem 2rem',
 	borderRadius: '10px',
 });
