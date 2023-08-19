@@ -57,6 +57,7 @@ import { todasPrefeituras } from '../../service/prefeituraService';
 export default function Denunciar() {
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState(false);
+	const [alert2, setAlert2] = useState(false);
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [categoria, setCategoria] = useState('1');
 	const [userId, setUserId] = useState(null);
@@ -108,8 +109,6 @@ export default function Denunciar() {
 
 	const handleOnSubmit = async (data) => {
 		try {
-			await setAlert(true);
-
 			const problemaData = {
 				observacao: data.observacao,
 				status: true,
@@ -125,15 +124,21 @@ export default function Denunciar() {
 				imagem: selectedImages,
 			};
 
-			await cadastrarProblema(problemaData);
+			const isValid = await cadastrarProblema(problemaData);
 
-			setTimeout(() => {
-				setAlert(false);
-			}, 1000);
+			if (isValid) {
+				console.log('Denúncia enviada!');
+				setTimeout(() => {
+					setAlert(false);
+					navigate('/usuario/dashboard');
+				}, 1000);
+			} else {
+				setTimeout(() => {
+					setAlert2(false);
+				}, 1000);
 
-			console.log('Problema relatado com sucesso!');
-			await setAlert(true);
-			navigate('/');
+				setAlert2(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -377,6 +382,14 @@ export default function Denunciar() {
 					<Stack sx={{ width: '100%', marginLeft: '1rem' }} spacing={2}>
 						<Alert variant="filled" severity="success">
 							Prefeitura cadastrada com sucesso!
+						</Alert>
+					</Stack>
+				)}
+
+				{alert2 && (
+					<Stack sx={{ width: '100%', marginLeft: '1rem' }} spacing={2}>
+						<Alert variant="filled" severity="error">
+							Não foi possível cadastrar!
 						</Alert>
 					</Stack>
 				)}

@@ -14,11 +14,11 @@ export default function Informacao() {
 		<>
 			<Navbar />
 
-			<StyledImgContainer></StyledImgContainer>
+			<StyledImgContainer>Quem somos</StyledImgContainer>
 			<StyledBox>
 				<Grid container spacing={2}>
 					<Grid item xs={12}>
-						<StyledTypography1>Entre em contato conosco</StyledTypography1>
+						<StyledTypography1>SOS Cidade</StyledTypography1>
 					</Grid>
 
 					<Grid item xs={12}>

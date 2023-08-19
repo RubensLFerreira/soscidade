@@ -48,21 +48,27 @@ export default function Login() {
 
 	const { login } = useContext(Context);
 	const [alert, setAlert] = useState(false);
+	const [alert2, setAlert2] = useState(false);
 
 	const handleOnSubmit = async (data) => {
 		try {
-			setAlert(true);
-
-			await login(data.login, data.senha);
-
+			const idValid = await login(data.login, data.senha);
 			console.log(watch(data));
 
-			setTimeout(() => {
-				setAlert(false);
-			}, 1000);
+			if (idValid) {
+				setTimeout(() => {
+					setAlert(false);
+				}, 1000);
 
-			console.log('Logado com sucesso!');
-			setAlert(true);
+				console.log('Logado com sucesso!');
+				setAlert(true);
+			} else {
+				setTimeout(() => {
+					setAlert2(false);
+				}, 1000);
+
+				setAlert2(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -118,6 +124,14 @@ export default function Login() {
 					<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
 						<Alert variant="filled" severity="success">
 							Usuário logado com sucesso!
+						</Alert>
+					</Stack>
+				)}
+
+				{alert2 && (
+					<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+						<Alert variant="filled" severity="error">
+							Falha no login!
 						</Alert>
 					</Stack>
 				)}

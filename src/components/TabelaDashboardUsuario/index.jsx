@@ -13,6 +13,9 @@ import {
 } from '@mui/material';
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
+import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
 import { todasPrefeituras } from '../../service/prefeituraService';
 import { todosUsuarios } from '../../service/usuarioService';
@@ -64,6 +67,7 @@ export default function TabelaDashBoardUsuario() {
 	};
 
 	const [problema, setProblema] = useState();
+	console.log(problema);
 
 	const token = localStorage.getItem('token');
 	const decodedToken = jwtDecode(token);
@@ -84,7 +88,7 @@ export default function TabelaDashBoardUsuario() {
 	return (
 		<>
 			<Typography variant="h4" style={{ margin: '2rem 0' }}>
-				Todas as denúncias
+				Todas as suas denúncias <b>{decodedToken.nome}</b>
 			</Typography>
 			<TableContainer
 				style={{
@@ -99,11 +103,12 @@ export default function TabelaDashBoardUsuario() {
 					<TableHead>
 						<TableRow>
 							<TableCell>id</TableCell>
-							<TableCell>Autor</TableCell>
 							<TableCell>Categoria</TableCell>
 							<TableCell>Prefeitura responsável</TableCell>
 							<TableCell>Descrição</TableCell>
-							<TableCell></TableCell>
+							<TableCell>Status</TableCell>
+							<TableCell>Visualizar</TableCell>
+							<TableCell>Alterar</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -114,13 +119,24 @@ export default function TabelaDashBoardUsuario() {
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 								>
 									<TableCell>{problema.id}</TableCell>
-									<TableCell>{getUsuario(problema.usuario_id)}</TableCell>
 									<TableCell>{getCategoria(problema.categoria_id)}</TableCell>
 									<TableCell>
 										{getNomePrefeitura(problema.prefeitura_id)}
 									</TableCell>
 
 									<TableCell>{problema.observacao}</TableCell>
+									<TableCell>
+										{problema.status ? (
+											<DoneOutlineOutlinedIcon sx={{ color: 'green' }} />
+										) : (
+											<ReportGmailerrorredOutlinedIcon sx={{ color: 'red' }} />
+										)}
+									</TableCell>
+									<TableCell>
+										<Button>
+											<RemoveRedEyeOutlinedIcon />
+										</Button>
+									</TableCell>
 									<TableCell>
 										<Button>
 											<EditOutlinedIcon />

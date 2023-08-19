@@ -62,6 +62,7 @@ const schema = yup
 
 export default function FormRegister() {
 	const [alert, setAlert] = useState(false);
+	const [alert2, setAlert2] = useState(false);
 	const navigate = useNavigate();
 
 	const {
@@ -75,9 +76,7 @@ export default function FormRegister() {
 
 	const handleOnSubmit = async (data) => {
 		try {
-			setAlert(true);
-
-			await cadastrarCidadao(
+			const isValid = await cadastrarCidadao(
 				data.nome,
 				data.cpf,
 				data.sexo,
@@ -90,13 +89,20 @@ export default function FormRegister() {
 
 			console.log(watch(data));
 
-			setTimeout(() => {
-				setAlert(false);
-			}, 1000);
+			if (isValid) {
+				setAlert(true);
 
-			console.log('cadastrado com sucesso!');
-			setAlert(true);
-			navigate('/login');
+				setTimeout(() => {
+					setAlert(false);
+					navigate('/login');
+				}, 1000);
+			} else {
+				setTimeout(() => {
+					setAlert2(false);
+				}, 1000);
+
+				setAlert2(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -107,8 +113,23 @@ export default function FormRegister() {
 			<StyledBox>
 				<form onSubmit={handleSubmit(handleOnSubmit)}>
 					<Grid container spacing={2}>
+						{alert && (
+							<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+								<Alert variant="filled" severity="success">
+									Prefeitura cadastrada com sucesso!
+								</Alert>
+							</Stack>
+						)}
+
+						{alert2 && (
+							<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+								<Alert variant="filled" severity="error">
+									Erro ao cadastrar!
+								</Alert>
+							</Stack>
+						)}
 						<Grid item xs={12}>
-							<StyledTypography>Cadastrar cidadão</StyledTypography>
+							<StyledTypography>Cadastrar</StyledTypography>
 						</Grid>
 
 						<Grid item xs={12}>
@@ -230,7 +251,7 @@ export default function FormRegister() {
 						</Grid>
 
 						<Grid item xs={12}>
-							<StyledButton variant="contained" input type="submit">
+							<StyledButton variant="contained" type="submit">
 								Cadastrar
 							</StyledButton>
 						</Grid>
@@ -247,13 +268,6 @@ export default function FormRegister() {
 						</Grid>
 					</Grid>
 				</form>
-				{alert && (
-					<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
-						<Alert variant="filled" severity="success">
-							Prefeitura cadastrada com sucesso!
-						</Alert>
-					</Stack>
-				)}
 			</StyledBox>
 		</Container>
 	);

@@ -15,7 +15,13 @@ export const StyledImgContainer = styled('div')({
 		'url(https://www.paceconsulting.ae/sites/default/files/2020-10/Depositphotos_212262180_xl-2015_0.jpg)',
 	backgroundSize: 'cover',
 	backgroundPosition: 'center center',
-	boxShadow: '2px 2px 8px black'
+	boxShadow: '2px 2px 8px black',
+	// display: 'flex',
+	// justifyContent: 'center',
+	// alignItems: 'center',
+	// fontSize: '30pt',
+	// color: '#f5f5f5',
+	// fontWeight: 'bolder',
 });
 
 export const StyledImg = styled('img')({

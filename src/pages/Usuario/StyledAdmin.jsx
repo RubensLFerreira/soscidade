@@ -41,6 +41,7 @@ export const StyledTypography1 = styled(Typography)({
 	textAlign: 'center',
 	margin: '2rem 0',
 	fontSize: '20pt',
+	fontWeight: 'bolder'
 });
 
 export const StyledTypography2 = styled(Typography)({

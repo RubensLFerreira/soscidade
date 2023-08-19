@@ -29,7 +29,7 @@ const schema = yup
 		telefone: yup
 			.string()
 			.required('Telefone é obrigatório!')
-			.min(3, 'No mínimo 3 caracteres')
+			.min(11, 'No mínimo 11 caracteres')
 			.max(11, 'No máximo 11 caracteres'),
 		email: yup.string().required('E-mail é obrigatório!'),
 		prefeito: yup
@@ -51,6 +51,7 @@ const schema = yup
 
 export default function FormRegisterPrefeitura() {
 	const [alert, setAlert] = useState(false);
+	const [alert2, setAlert2] = useState(false);
 	const navigate = useNavigate();
 
 	const {
@@ -64,9 +65,7 @@ export default function FormRegisterPrefeitura() {
 
 	const handleOnSubmit = async (data) => {
 		try {
-			setAlert(true);
-
-			await cadastrarPrefeitura(
+			const isValid = await cadastrarPrefeitura(
 				data.nome,
 				data.telefone,
 				data.email,
@@ -78,13 +77,20 @@ export default function FormRegisterPrefeitura() {
 
 			console.log(watch(data));
 
-			setTimeout(() => {
-				setAlert(false);
-			}, 1000);
+			if (isValid) {
+				setAlert(true);
 
-			console.log('cadastrado com sucesso!');
-			setAlert(true);
-			navigate('/login');
+				setTimeout(() => {
+					setAlert(false);
+					navigate('/login');
+				}, 1000);
+			} else {
+				setTimeout(() => {
+					setAlert2(false);
+				}, 1000);
+
+				setAlert2(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -95,8 +101,24 @@ export default function FormRegisterPrefeitura() {
 			<StyledBox>
 				<form onSubmit={handleSubmit(handleOnSubmit)}>
 					<Grid container spacing={2}>
+						{alert && (
+							<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+								<Alert variant="filled" severity="success">
+									Prefeitura cadastrada com sucesso!
+								</Alert>
+							</Stack>
+						)}
+
+						{alert2 && (
+							<Stack sx={{ width: '300px', margin: 'auto auto' }} spacing={2}>
+								<Alert variant="filled" severity="error">
+									Erro ao cadastrar!
+								</Alert>
+							</Stack>
+						)}
+
 						<Grid item xs={12}>
-							<StyledTypography>Cadastrar Prefeitura</StyledTypography>
+							<StyledTypography>Cadastrar</StyledTypography>
 						</Grid>
 
 						<Grid item xs={12}>
@@ -177,7 +199,7 @@ export default function FormRegisterPrefeitura() {
 						</Grid>
 
 						<Grid item xs={12}>
-							<StyledButton variant="contained" input type="submit">
+							<StyledButton variant="contained" type="submit">
 								Cadastrar
 							</StyledButton>
 						</Grid>
@@ -195,13 +217,6 @@ export default function FormRegisterPrefeitura() {
 						</Grid>
 					</Grid>
 				</form>
-				{alert && (
-					<Stack sx={{ width: '300px', marginLeft: '1rem' }} spacing={2}>
-						<Alert variant="filled" severity="success">
-							Prefeitura cadastrada com sucesso!
-						</Alert>
-					</Stack>
-				)}
 			</StyledBox>
 		</Container>
 	);

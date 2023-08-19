@@ -35,7 +35,7 @@ export default function Dashboardusuario() {
 
 	const token = localStorage.getItem('token');
 	const decoded = jwtDecode(token);
-	const nomeUsuario = decoded.nome;
+	// const nomeUsuario = decoded.nome;
 
 	return (
 		<>
@@ -43,25 +43,23 @@ export default function Dashboardusuario() {
 			<StyledBox>
 				<StyledGrid container>
 					<StyledGrid1>
-						<StyledTypography1>
-							Usuário: <b>{nomeUsuario}</b>
-						</StyledTypography1>
+						<StyledTypography1>Dashboard</StyledTypography1>
 						<InputSearch />
 
 						<div style={{ margin: '2rem 0' }}>
-							<StyledTypography2>Lista de usuários</StyledTypography2>
+							<StyledTypography2>Lista de denúncias</StyledTypography2>
 							<ListStyle component="nav" aria-label="mailbox folders">
 								<Divider light />
 								<ListItem button>
 									<ListItemText
-										primary="Denúncias"
+										primary="Visualizar"
 										onClick={() => buttonClick1('button1')}
 									/>
 								</ListItem>
 							</ListStyle>
 						</div>
 
-						<div style={{ margin: '1rem 0' }}>
+						{/* <div style={{ margin: '1rem 0' }}>
 							<StyledTypography2>Filtrar Denúncias por</StyledTypography2>
 							<ListStyle component="nav" aria-label="mailbox folders">
 								<ListItem button>
@@ -78,14 +76,14 @@ export default function Dashboardusuario() {
 									/>
 								</ListItem>
 							</ListStyle>
-						</div>
+						</div> */}
 					</StyledGrid1>
 					<StyledGrid2>
 						{buttonAtive1 === 'button1' && <TabelaDashBoardUsuario />}
 					</StyledGrid2>
 					<StyledGrid3>
-						{buttonAtive2 === 'button4' && <TabelaProblemasFinalizados />}
-						{buttonAtive2 === 'button5' && 'Local reservado para a tabela'}
+						{/* {buttonAtive2 === 'button4' && <TabelaProblemasFinalizados />} */}
+						{/* {buttonAtive2 === 'button5' && 'Local reservado para a tabela'} */}
 						{/* {buttonAtive2 === 'button5' && <TabelaProblemasPendentes />} */}
 					</StyledGrid3>
 				</StyledGrid>

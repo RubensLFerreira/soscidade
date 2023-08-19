@@ -38,7 +38,7 @@ export const Router = () => {
 
 				<Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
 
-				<Route path="/cidadao/dashboard" element={<DashboardCidadao />} />
+				<Route path="/usuario/dashboard" element={<DashboardCidadao />} />
 
 				<Route path="/admin" element={<Admin />} />
 
