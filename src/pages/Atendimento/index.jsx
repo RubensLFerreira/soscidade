@@ -16,11 +16,11 @@ export default function Atendimento() {
 		<>
 			<Navbar />
 
-			<StyledImgContainer></StyledImgContainer>
+			<StyledImgContainer>Entrar em contato</StyledImgContainer>
 			<StyledBox>
 				<Grid container spacing={2}>
 					<Grid item xs={12}>
-						<StyledTypography1>Entre em contato conosco</StyledTypography1>
+						<StyledTypography1>Enviar E-mail</StyledTypography1>
 					</Grid>
 
 					<Grid item xs={12}>

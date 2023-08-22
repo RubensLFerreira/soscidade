@@ -12,7 +12,7 @@ export const StyledImgContainer = styled('div')({
 	height: '200px',
 	overflow: 'hidden',
 	backgroundImage:
-		'url(https://www.cloud4c.com/sites/default/files/2022-07/cloud4c-company-contact-1Desktop.jpg)',
+		'url(https://www.pit.ac.in/assets/images/ContactUs/contact-us-banner.jpg)',
 	backgroundSize: 'cover',
 	backgroundPosition: 'center center',
 	boxShadow: '2px 2px 8px black',
@@ -39,33 +39,15 @@ export const StyledTypography1 = styled(Typography)({
 	textAlign: 'center',
 });
 
-export const StyledTextField1 = styled(TextField)({
-	width: '60%',
-	boxShadow: '0 0 0 0',
-	outline: 0,
-	border: '1px solid transparent',
-});
-
-export const StyledTextField2 = styled(TextField)({
-	width: '60%',
-	backgroundColor: '#EAF3FF',
-	marginBottom: 'rem',
-});
-
-export const StyledTextField3 = styled(Autocomplete)({
-	width: '60%',
-	backgroundColor: '#EAF3FF',
-	marginBottom: 'rem',
-});
-
 export const StyledBox = styled(Box)({
 	backgroundColor: 'white',
 	maxWidth: '900px',
 	width: '70vw',
+	minHeight: '40vh',
 	margin: '3rem auto 5rem auto',
 	padding: '1rem 2rem',
 	borderRadius: '10px',
-	textAlign: 'center',
+	textAlign: 'justify',
 });
 
 export const StyledBox2 = styled(Box)({
@@ -79,26 +61,4 @@ export const StyledBox2 = styled(Box)({
 		margin: 10,
 	},
 	justifyContent: 'space-around',
-});
-
-export const StyledButton = styled(Button)({
-	width: '200px',
-	height: '50px',
-	display: 'flex',
-	margin: '2rem auto',
-	color: '#f5f5f5',
-	backgroundColor: '#3b8efc',
-	'&:hover': {
-		backgroundColor: '#1e74e6',
-	},
-});
-
-export const UploadButton = styled('label')({
-	width: '100%',
-	padding: '20px 20px',
-	backgroundColor: '#EAF3FF',
-	color: '#4b4b4b',
-	cursor: 'pointer',
-	borderRadius: '4px',
-	border: '1px solid #88c2ff',
 });

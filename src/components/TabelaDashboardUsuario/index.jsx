@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import {
 	Table,
@@ -10,6 +11,12 @@ import {
 	TableRow,
 	Paper,
 	Button,
+	Modal,
+	Card,
+	CardActions,
+	CardContent,
+	CardMedia,
+	Box,
 } from '@mui/material';
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -21,8 +28,29 @@ import { todasPrefeituras } from '../../service/prefeituraService';
 import { todosUsuarios } from '../../service/usuarioService';
 import { todasDenunciasUsuario } from '../../service/problemasService';
 
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 450,
+	boxShadow: '2px 2px 6px black',
+};
+
 export default function TabelaDashBoardUsuario() {
+	const handleClose = () => setOpen(false);
+	const [openProblemaId, setOpenProblemaId] = useState(null);
+
+	const handleOpenModal = (problemaId) => {
+		setOpenProblemaId(problemaId);
+	};
+
+	const handleCloseModal = () => {
+		setOpenProblemaId(null);
+	};
+
 	const [usuario, setUsuario] = useState([]);
+	const [problema, setProblema] = useState();
 	const [prefeitura, setPrefeitura] = useState([]);
 	const [categorias, setCategorias] = useState([
 		{ id: 1, nome: 'Iluminação' },
@@ -32,6 +60,8 @@ export default function TabelaDashBoardUsuario() {
 		{ id: 5, nome: 'Sinalização' },
 		{ id: 6, nome: 'Outros' },
 	]);
+
+	const imagemUrl = 'http://localhost:8080/imagem';
 
 	useEffect(() => {
 		const carregarUsuarios = async () => {
@@ -47,10 +77,10 @@ export default function TabelaDashBoardUsuario() {
 		CarregarPrefeituras();
 	}, []);
 
-	const getUsuario = (usuarioId) => {
-		const user = usuario.find((usr) => usr.id === usuarioId);
-		return user ? user.nome : 'usuário não encontrado';
-	};
+	// const getUsuario = (usuarioId) => {
+	// 	const user = usuario.find((usr) => usr.id === usuarioId);
+	// 	return user ? user.nome : 'usuário não encontrado';
+	// };
 
 	const getCategoria = (categoriaId) => {
 		const categoria = categorias.find((cat) => cat.id === categoriaId);
@@ -65,9 +95,6 @@ export default function TabelaDashBoardUsuario() {
 			? prefeituraEncontrada['usuario'].nome
 			: 'Prefeitura não encontrada';
 	};
-
-	const [problema, setProblema] = useState();
-	console.log(problema);
 
 	const token = localStorage.getItem('token');
 	const decodedToken = jwtDecode(token);
@@ -88,11 +115,11 @@ export default function TabelaDashBoardUsuario() {
 	return (
 		<>
 			<Typography variant="h4" style={{ margin: '2rem 0' }}>
-				Todas as suas denúncias <b>{decodedToken.nome}</b>
+				Todas as suas denúncias <b>{decodedToken.nome}</b>!
 			</Typography>
 			<TableContainer
 				style={{
-					maxHeight: '500px',
+					maxHeight: '400px',
 					maxWidth: '100%',
 					overflowY: 'auto',
 					overflowX: 'auto',
@@ -133,14 +160,76 @@ export default function TabelaDashBoardUsuario() {
 										)}
 									</TableCell>
 									<TableCell>
-										<Button>
+										<Button onClick={() => handleOpenModal(problema.id)}>
 											<RemoveRedEyeOutlinedIcon />
 										</Button>
+
+										<Modal
+											open={openProblemaId === problema.id}
+											onClose={handleCloseModal}
+											aria-labelledby="modal-modal-title"
+											aria-describedby="modal-modal-description"
+											BackdropProps={{
+												style: { backgroundColor: 'transparent' },
+											}}
+										>
+											<Box sx={style}>
+												<Card>
+													<CardMedia
+														sx={{
+															height: 140,
+															backgroundColor: '#333',
+															color: 'white',
+														}}
+														image={`${imagemUrl}/${problema?.imagem[0]}`}
+														title="green iguana"
+													/>
+													<CardContent>
+														<Typography
+															gutterBottom
+															variant="h5"
+															component="div"
+														>
+															{problema.observacao}
+														</Typography>
+														<Typography variant="body2" color="text.secondary">
+															Categoria: {getCategoria(problema.categoria_id)}
+														</Typography>
+														<Typography variant="body2" color="text.secondary">
+															Responsável:{' '}
+															{getNomePrefeitura(problema.prefeitura_id)}
+														</Typography>
+														<Typography variant="body2" color="text.secondary">
+															Status:{' '}
+															{problema.status ? (
+																<DoneOutlineOutlinedIcon
+																	sx={{ color: 'green' }}
+																/>
+															) : (
+																<ReportGmailerrorredOutlinedIcon
+																	sx={{ color: 'red' }}
+																/>
+															)}
+														</Typography>
+													</CardContent>
+													<CardActions>
+														<Button size="small" onClick={handleCloseModal}>
+															Cancelar
+														</Button>
+														<Link to="/editar/editar/:id?">
+															<Button>Editar</Button>
+														</Link>
+													</CardActions>
+												</Card>
+											</Box>
+										</Modal>
 									</TableCell>
 									<TableCell>
-										<Button>
-											<EditOutlinedIcon />
-										</Button>
+										<Link to="/editar/editar/:id?">
+											<Button>
+												<EditOutlinedIcon />
+											</Button>
+										</Link>
 									</TableCell>
 								</TableRow>
 							))}

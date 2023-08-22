@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -63,6 +64,13 @@ export default function Denunciar() {
 	const [userId, setUserId] = useState(null);
 	const [opcoes, setOpcoes] = useState([]);
 	const [opcaoId, setOpcaoId] = useState('');
+	const [ufs, setUfs] = useState([]);
+	const [cities, setCities] = useState([]);
+	const [selectedUf, setSelectedUf] = useState('0');
+	const [selectedCity, setSelectedCity] = useState('0');
+
+	console.log(selectedCity);
+	console.log(selectedUf);
 
 	const { authenticated } = useContext(Context);
 
@@ -90,13 +98,44 @@ export default function Denunciar() {
 			try {
 				const response = await todasPrefeituras();
 				setOpcoes(response.prefeituras);
-				console.log(response.prefeituras);
 			} catch (error) {
 				console.error(error);
 			}
 		};
 		CarregarPrefeituras();
 	}, []);
+
+	useEffect(() => {
+		if (selectedUf === '0') {
+			return;
+		}
+		axios
+			.get(
+				`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+			)
+			.then((response) => {
+				setCities(response.data);
+			});
+	}, [selectedUf]);
+
+	useEffect(() => {
+		axios
+			.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+			.then((response) => {
+				setUfs(response.data);
+			});
+	}, []);
+
+	function handleSelectUf(event) {
+		const uf = event.target.value;
+		setSelectedUf(uf);
+		setSelectedCity('0');
+	}
+
+	function handleSelectCity(event) {
+		const city = event.target.value;
+		setSelectedCity(city);
+	}
 
 	const handleOptionChange = (event, value) => {
 		if (value) {
@@ -111,7 +150,7 @@ export default function Denunciar() {
 		try {
 			const problemaData = {
 				observacao: data.observacao,
-				status: true,
+				status: false,
 				categoria: categoria,
 				usuario: userId,
 				prefeitura: opcaoId,
@@ -119,8 +158,8 @@ export default function Denunciar() {
 				longitude: '-46.656571',
 				rua: data.rua,
 				bairro: data.bairro,
-				cidade: data.cidade,
-				uf: data.uf,
+				cidade: selectedCity,
+				uf: selectedUf,
 				imagem: selectedImages,
 			};
 
@@ -213,7 +252,7 @@ export default function Denunciar() {
 									<img
 										src={URL.createObjectURL(image)}
 										alt={`Preview ${index}`}
-										style={{ maxWidth: '80%', maxHeight: '80%' }}
+										style={{ maxWidth: '10rem', maxHeight: '10rem' }}
 									/>
 								</div>
 							))}
@@ -299,33 +338,55 @@ export default function Denunciar() {
 						<StyledTypography2>Endereço</StyledTypography2>
 						<Grid container spacing={1}>
 							<Grid xs={7} item>
-								<StyledTextField1
-									label="Cidade"
-									placeholder="Ex: Cedro"
-									variant="outlined"
+								<select
+									name="City"
+									id="City"
+									value={selectedCity}
 									{...register('cidade')}
-								/>
-								<StyledAlert>{errors.cidade?.message}</StyledAlert>
+									onChange={handleSelectCity}
+									style={{
+										width: '100%',
+										height: '55px',
+										backgroundColor: '#EAF3FF',
+										border: '1px solid #cacaca',
+										borderRadius: '5px',
+										fontSize: '16px',
+										color: '#4e4e4e',
+									}}
+								>
+									<option value="0">Selecione uma cidade</option>
+									{cities.map((city) => (
+										<option key={city.id} value={city.nome}>
+											{city.nome}
+										</option>
+									))}
+								</select>
 							</Grid>
 
-							<Grid xs={2} item>
-								<StyledTextField1
-									label="UF"
-									placeholder="Ex: CE"
-									variant="outlined"
+							<Grid xs={5} item>
+								<select
+									name="uf"
+									id="uf"
+									value={selectedUf}
 									{...register('uf')}
-								/>
-								<StyledAlert>{errors.uf?.message}</StyledAlert>
-							</Grid>
-
-							<Grid xs={3} item>
-								<StyledTextField1
-									label="CEP"
-									placeholder="Ex: 63400000"
-									variant="outlined"
-									// {...register('uf')}
-								/>
-								{/* <StyledAlert>{errors.uf?.message}</StyledAlert> */}
+									onChange={handleSelectUf}
+									style={{
+										width: '100%',
+										height: '55px',
+										backgroundColor: '#EAF3FF',
+										border: '1px solid #cacaca',
+										borderRadius: '5px',
+										fontSize: '16px',
+										color: '#4e4e4e',
+									}}
+								>
+									<option value="0">Selecione uma UF</option>
+									{ufs.map((uf) => (
+										<option key={uf.sigla} value={uf.sigla}>
+											{uf.nome}
+										</option>
+									))}
+								</select>
 							</Grid>
 
 							<Grid xs={6} item>
@@ -366,9 +427,7 @@ export default function Denunciar() {
 					</StyledGrid>
 					{authenticated ? (
 						<StyledGrid>
-							<StyledButton input type="submit">
-								Reportar problema
-							</StyledButton>
+							<StyledButton type="submit">Reportar problema</StyledButton>
 						</StyledGrid>
 					) : (
 						<StyledGrid>

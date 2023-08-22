@@ -12,6 +12,8 @@ import Informacao from '../pages/Informacao';
 
 import Admin from '../pages/Admin';
 
+import Perfil from '../pages/Perfil';
+
 import DashboardCidadao from '../pages/Usuario';
 
 import CadastrarCidadao from '../pages/Cidadao/CadastrarCidadao';
@@ -21,6 +23,7 @@ import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
 import NotPage from '../pages/NotPage';
 
 import { UserProvider } from '../context/UserContext';
+import UsuarioEditar from './../pages/Usuario/UsuarioEditar';
 
 export const Router = () => {
 	return (
@@ -39,6 +42,10 @@ export const Router = () => {
 				<Route path="/cidadao/cadastrar" element={<CadastrarCidadao />} />
 
 				<Route path="/usuario/dashboard" element={<DashboardCidadao />} />
+
+				<Route path="/editar/editar/:id?" element={<UsuarioEditar />} />
+
+				<Route path="/perfil/:id?" element={<Perfil />} />
 
 				<Route path="/admin" element={<Admin />} />
 

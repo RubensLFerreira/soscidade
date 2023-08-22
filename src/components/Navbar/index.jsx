@@ -57,7 +57,7 @@ export default function Navbar() {
 	};
 
 	const handlePerfil = () => {
-		navigate('/*');
+		navigate('/perfil/:id?');
 	};
 
 	const handleLogin = () => {
