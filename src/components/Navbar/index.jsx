@@ -119,6 +119,12 @@ export default function Navbar() {
 							</Button>
 						</Link>
 
+						<Link to={'/denunciar'}>
+							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
+								Relatar
+							</Button>
+						</Link>
+
 						<Link to={'/informacao'}>
 							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
 								Quem somos
