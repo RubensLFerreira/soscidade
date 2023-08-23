@@ -10,6 +10,16 @@ export const todosProblemas = async () => {
 	}
 };
 
+export const deleteProblema = async (id) => {
+	try {
+		const problema = await api.delete(`/problema/excluir/${id}`);
+		return problema.data;
+	} catch (error) {
+		console.log('Erro ao deletar denúncia', error);
+		return { message: error };
+	}
+};
+
 export const todasDenunciasUsuario = async (id) => {
 	try {
 		const problemas = await api.get(`/problemas/usuario/${id}`);
