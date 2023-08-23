@@ -43,7 +43,7 @@ export const Router = () => {
 
 				<Route path="/usuario/dashboard" element={<DashboardCidadao />} />
 
-				<Route path="/editar/editar/:id?" element={<UsuarioEditar />} />
+				<Route path="/editar/usuario/:id?" element={<UsuarioEditar />} />
 
 				<Route path="/perfil/:id?" element={<Perfil />} />
 
