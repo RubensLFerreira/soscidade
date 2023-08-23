@@ -23,10 +23,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import DoneOutlineOutlinedIcon from '@mui/icons-material/DoneOutlineOutlined';
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 import { todasPrefeituras } from '../../service/prefeituraService';
 import { todosUsuarios } from '../../service/usuarioService';
 import { todasDenunciasUsuario } from '../../service/problemasService';
+import { deleteProblema } from '../../service/problemasService';
 
 const style = {
 	position: 'absolute',
@@ -38,7 +40,6 @@ const style = {
 };
 
 export default function TabelaDashBoardUsuario() {
-	const handleClose = () => setOpen(false);
 	const [openProblemaId, setOpenProblemaId] = useState(null);
 
 	const handleOpenModal = (problemaId) => {
@@ -77,11 +78,6 @@ export default function TabelaDashBoardUsuario() {
 		CarregarPrefeituras();
 	}, []);
 
-	// const getUsuario = (usuarioId) => {
-	// 	const user = usuario.find((usr) => usr.id === usuarioId);
-	// 	return user ? user.nome : 'usuário não encontrado';
-	// };
-
 	const getCategoria = (categoriaId) => {
 		const categoria = categorias.find((cat) => cat.id === categoriaId);
 		return categoria ? categoria.nome : 'Categoria não encontrada';
@@ -112,6 +108,17 @@ export default function TabelaDashBoardUsuario() {
 		carregarDenuncias();
 	}, [idUsuario]);
 
+	const problemaById = async (problemaId) => {
+		try {
+			await deleteProblema(problemaId);
+
+			const response = await todasDenunciasUsuario(idUsuario);
+			setProblema(response.problemas);
+		} catch (error) {
+			console.error('Erro ao excluir o denuncia:', error);
+		}
+	};
+
 	return (
 		<>
 			<Typography variant="h4" style={{ margin: '2rem 0' }}>
@@ -129,13 +136,13 @@ export default function TabelaDashBoardUsuario() {
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
 					<TableHead>
 						<TableRow>
-							<TableCell>id</TableCell>
+							<TableCell>Status</TableCell>
 							<TableCell>Categoria</TableCell>
 							<TableCell>Prefeitura responsável</TableCell>
 							<TableCell>Descrição</TableCell>
-							<TableCell>Status</TableCell>
 							<TableCell>Visualizar</TableCell>
 							<TableCell>Alterar</TableCell>
+							<TableCell>Deletar</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -145,13 +152,6 @@ export default function TabelaDashBoardUsuario() {
 									key={problema.id}
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 								>
-									<TableCell>{problema.id}</TableCell>
-									<TableCell>{getCategoria(problema.categoria_id)}</TableCell>
-									<TableCell>
-										{getNomePrefeitura(problema.prefeitura_id)}
-									</TableCell>
-
-									<TableCell>{problema.observacao}</TableCell>
 									<TableCell>
 										{problema.status ? (
 											<DoneOutlineOutlinedIcon sx={{ color: 'green' }} />
@@ -159,6 +159,13 @@ export default function TabelaDashBoardUsuario() {
 											<ReportGmailerrorredOutlinedIcon sx={{ color: 'red' }} />
 										)}
 									</TableCell>
+									<TableCell>{getCategoria(problema.categoria_id)}</TableCell>
+									<TableCell>
+										{getNomePrefeitura(problema.prefeitura_id)}
+									</TableCell>
+
+									<TableCell>{problema.observacao}</TableCell>
+
 									<TableCell>
 										<Button onClick={() => handleOpenModal(problema.id)}>
 											<RemoveRedEyeOutlinedIcon />
@@ -181,7 +188,7 @@ export default function TabelaDashBoardUsuario() {
 															backgroundColor: '#333',
 															color: 'white',
 														}}
-														image={`${imagemUrl}/${problema?.imagem[0]}`}
+														image={`${imagemUrl}/${problema.imagem[0]}`}
 														title="green iguana"
 													/>
 													<CardContent>
@@ -213,10 +220,14 @@ export default function TabelaDashBoardUsuario() {
 														</Typography>
 													</CardContent>
 													<CardActions>
-														<Button size="small" onClick={handleCloseModal}>
+														<Button
+															size="small"
+															color="error"
+															onClick={handleCloseModal}
+														>
 															Cancelar
 														</Button>
-														<Link to="/editar/editar/:id?">
+														<Link to="/editar/usuario/:id?">
 															<Button>Editar</Button>
 														</Link>
 													</CardActions>
@@ -225,11 +236,19 @@ export default function TabelaDashBoardUsuario() {
 										</Modal>
 									</TableCell>
 									<TableCell>
-										<Link to="/editar/editar/:id?">
+										<Link to="/editar/usuario/:id?">
 											<Button>
 												<EditOutlinedIcon />
 											</Button>
 										</Link>
+									</TableCell>
+									<TableCell>
+										<Button
+											color="error"
+											onClick={() => problemaById(problema.id)}
+										>
+											<HighlightOffOutlinedIcon sx={{ color: 'red' }} />
+										</Button>
 									</TableCell>
 								</TableRow>
 							))}
