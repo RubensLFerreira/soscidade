@@ -43,13 +43,13 @@ O SOSCidade surge como uma proposta de sistema que visa solucionar os problemas 
 
 > ### 🖇 Diagrama ERP
 
-![App Screenshot](https://live.staticflickr.com/65535/53139414705_610818ff98_c.jpg)
+![App Screenshot](https://live.staticflickr.com/65535/53140474331_7218534d2a_z.jpg)
 
 <br/>
 
-> ### 🗂 Arquitetura das pastas (back-end)
+> ### 🗂 Arquitetura das pastas (front-end)
 
-![App Screenshot](https://live.staticflickr.com/65535/53137286366_101819c47f_b.jpg)
+![App Screenshot](https://live.staticflickr.com/65535/53140474316_f0334340ce_z.jpg)
 
 <br/>
 
