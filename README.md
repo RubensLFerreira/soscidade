@@ -58,7 +58,37 @@ erDiagram
 
 > ### 🗂 Arquitetura das pastas (front-end)
 
-![App Screenshot](https://i.pinimg.com/originals/0f/5c/24/0f5c244994a656e813bd0d0992786fb0.png)
+```mermaid
+flowchart LR
+    subgraph recommendation
+     vscode
+    end
+
+    subgraph source
+     main.jsx --- index.htm
+    end
+
+    subgraph source
+    src --- App.jsx
+    src --- main.jsx
+    end
+
+    subgraph assets
+    src --- public 
+    public --- imagens
+    public --- icons
+    end
+
+    subgraph application
+    src --- components
+    src --- context
+    src --- pages
+    src --- router
+    src --- services
+    src --- styles
+    src --- utils
+    end
+```
 
 <br/>
 
