@@ -43,13 +43,22 @@ O SOSCidade surge como uma proposta de sistema que visa solucionar os problemas 
 
 > ### 🖇 Diagrama ERP
 
-![App Screenshot](https://live.staticflickr.com/65535/53140474331_7218534d2a_z.jpg)
+```mermaid
+erDiagram
+    PERFIL ||..|{ USUARIO : TEM
+    USUARIO ||..|{ CIDADAO : POSSUI
+    USUARIO ||..|{ PREFEITURA : POSSUI
+    CIDADAO ||..|{ PROBLEMA : PERTENCE
+    PREFEITURA ||..|{ PROBLEMA : PERTENCE
+    PROBLEMA }|..|| LOCALIZACAO : POSSUI
+    CATEGORIA ||..|{ PROBLEMA : PERTENCE
+```
 
 <br/>
 
 > ### 🗂 Arquitetura das pastas (front-end)
 
-![App Screenshot](https://live.staticflickr.com/65535/53140474316_f0334340ce_z.jpg)
+![App Screenshot](https://i.pinimg.com/originals/0f/5c/24/0f5c244994a656e813bd0d0992786fb0.png)
 
 <br/>
 
