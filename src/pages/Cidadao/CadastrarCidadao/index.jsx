@@ -180,18 +180,6 @@ export default function FormRegister() {
 							<StyledAlert>{errors.cpf?.message}</StyledAlert>
 						</Grid>
 
-						{/* <Grid item xs={12}>
-							<StyledTextField1
-								label="Sexo"
-								variant="standard"
-								type="text"
-								name="sexo"
-								placeholder="Digite seu sexo"
-								{...register('sexo')}
-							/>
-							<StyledAlert>{errors.sexo?.message}</StyledAlert>
-						</Grid> */}
-
 						<Grid item xs={12}>
 							<FormControl fullWidth>
 								<InputLabel

@@ -26,7 +26,7 @@ export default function Atendimento() {
 					<Grid item xs={12}>
 						<StyledTextField1
 							label="Motivo do contato"
-							variant="standard"
+							variant="outlined"
 							type="text"
 							name="nome"
 							placeholder="Digite aqui"
@@ -36,7 +36,7 @@ export default function Atendimento() {
 					<Grid item xs={12}>
 						<StyledTextField1
 							label="Nome"
-							variant="standard"
+							variant="outlined"
 							type="text"
 							name="nome"
 							placeholder="Digite seu nome"
@@ -46,7 +46,7 @@ export default function Atendimento() {
 					<Grid item xs={12}>
 						<StyledTextField1
 							label="Telefone"
-							variant="standard"
+							variant="outlined"
 							type="tel"
 							name="telefone"
 							placeholder="Digite seu telefone"
@@ -56,7 +56,7 @@ export default function Atendimento() {
 					<Grid item xs={12}>
 						<StyledTextField1
 							label="Email"
-							variant="standard"
+							variant="outlined"
 							type="email"
 							name="email"
 							placeholder="Digite seu email"
@@ -66,7 +66,7 @@ export default function Atendimento() {
 					<Grid item xs={12}>
 						<StyledTextField1
 							label="CPF"
-							variant="standard"
+							variant="outlined"
 							type="text"
 							name="cpf"
 							placeholder="Digite seu cpf"

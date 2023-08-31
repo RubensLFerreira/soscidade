@@ -57,7 +57,7 @@ export default function Navbar() {
 	};
 
 	const handlePerfil = () => {
-		navigate('/perfil/:id?');
+		navigate('/usuario/editar/:id?');
 	};
 
 	const handleLogin = () => {
@@ -121,7 +121,7 @@ export default function Navbar() {
 
 						<Link to={'/denunciar'}>
 							<Button sx={{ my: 2, color: 'white', display: 'block' }}>
-								Relatar
+								Reportar
 							</Button>
 						</Link>
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -38,7 +38,7 @@ import {
 	StyledButton,
 	StyledAlert,
 	StyledTextField3,
-} from './StyledDenunciar';
+} from './StyledEditar';
 
 const schema = yup
 	.object({
@@ -52,10 +52,11 @@ const schema = yup
 
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { cadastrarProblema } from '../../service/problemasService';
+
+import { editarProblema } from '../../service/problemasService';
 import { todasPrefeituras } from '../../service/prefeituraService';
 
-export default function Denunciar() {
+export default function DenunciarEditar() {
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState(false);
 	const [alert2, setAlert2] = useState(false);
@@ -70,6 +71,7 @@ export default function Denunciar() {
 	const [selectedCity, setSelectedCity] = useState('0');
 
 	const { authenticated } = useContext(Context);
+	const { id } = useParams();
 
 	const {
 		register,
@@ -160,7 +162,7 @@ export default function Denunciar() {
 				imagem: selectedImages,
 			};
 
-			const isValid = await cadastrarProblema(problemaData);
+			const isValid = await editarProblema(problemaData, id);
 
 			if (isValid) {
 				console.log('Denúncia enviada!');

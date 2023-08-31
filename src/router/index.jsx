@@ -20,10 +20,11 @@ import CadastrarCidadao from '../pages/Cidadao/CadastrarCidadao';
 
 import CadastrarPrefeitura from '../pages/Prefeitura/CadastrarPrefeitura';
 
+import DenunciaEditar from './../pages/DenunciaEditar';
+
 import NotPage from '../pages/NotPage';
 
 import { UserProvider } from '../context/UserContext';
-import UsuarioEditar from './../pages/Usuario/UsuarioEditar';
 
 export const Router = () => {
 	return (
@@ -43,9 +44,9 @@ export const Router = () => {
 
 				<Route path="/usuario/dashboard" element={<DashboardCidadao />} />
 
-				<Route path="/editar/usuario/:id?" element={<UsuarioEditar />} />
+				<Route path="/denuncia/editar/:id?" element={<DenunciaEditar />} />
 
-				<Route path="/perfil/:id?" element={<Perfil />} />
+				<Route path="/usuario/editar/:id?" element={<Perfil />} />
 
 				<Route path="/admin" element={<Admin />} />
 

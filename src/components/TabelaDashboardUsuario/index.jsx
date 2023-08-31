@@ -227,7 +227,7 @@ export default function TabelaDashBoardUsuario() {
 														>
 															Cancelar
 														</Button>
-														<Link to="/editar/usuario/:id?">
+														<Link to={`/denuncia/editar/${problema.id}`}>
 															<Button>Editar</Button>
 														</Link>
 													</CardActions>
@@ -236,7 +236,7 @@ export default function TabelaDashBoardUsuario() {
 										</Modal>
 									</TableCell>
 									<TableCell>
-										<Link to="/editar/usuario/:id?">
+										<Link to={`/denuncia/editar/${problema.id}`}>
 											<Button>
 												<EditOutlinedIcon />
 											</Button>
